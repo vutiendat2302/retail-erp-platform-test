@@ -14,3 +14,7 @@ export const updateWarehouse = (id: string, data: WarehouseResponseDto) => api.p
 
 export const deleteWarehouse = (id: string) => api.delete(`/api/warehouse/${id}`);
 
+// Inventory
+export const getInventories = () => api.get('/api/inventory');
+
+export const getInventoryByNameWarehouse = (id: String) => api.get(`/api/inventory/${id}`);

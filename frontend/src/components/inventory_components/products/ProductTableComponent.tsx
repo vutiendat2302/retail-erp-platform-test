@@ -11,18 +11,9 @@ interface Product {
   description: string;
   priceNormal: number;
   status: boolean;
-  brandResponseDto: {
-    id: string;
-    name: string;
-  };
-  categoryResponseDto: {
-    id: string;
-    name: string;
-  };
-  manufacturingLocationResponseDto: {
-    id: string;
-    name: string;
-  };
+  brandName: string;
+  categoryName: string;
+  manufacturingLocationName: string;
 }
 
 interface ProductTable {
@@ -57,7 +48,7 @@ const ProductTableComponent: React.FC<ProductTable> = ({
 
   
   return (
-  <div className='w-[90%] mx-auto items-center '>
+  <div className='w-full mx-auto items-center '>
     <Card>
       <CardHeader>
         <div className='flex items-center justify-between'>
@@ -87,7 +78,7 @@ const ProductTableComponent: React.FC<ProductTable> = ({
                   <TableHead className='text-center w-[10%] !border-r !border-gray-300'>PriceNormal</TableHead>
                   <TableHead className='text-center !border-r !border-gray-300'>Brand</TableHead>
                   <TableHead className='text-center !border-r !border-gray-300'>Category</TableHead>
-                  <TableHead className='text-center !border-r !border-gray-300'>ManufacturingLocation</TableHead>
+                  
                   <TableHead className='text-center !border-r !border-gray-300'>Status</TableHead>
                   <TableHead className='text-center '>Actions</TableHead>
                 </TableRow>
@@ -108,9 +99,9 @@ const ProductTableComponent: React.FC<ProductTable> = ({
                         </div>
                       </TableCell>
                       <TableCell className='text-center w-[10%] !border-r !border-gray-300'>{product.priceNormal}</TableCell>
-                      <TableCell>{product.brandResponseDto?.name || '-'}</TableCell>
-                      <TableCell>{product.categoryResponseDto?.name || '-'}</TableCell>
-                      <TableCell>{product.manufacturingLocationResponseDto?.name || '-'}</TableCell>
+                      <TableCell>{product.brandName || '-'}</TableCell>
+                      <TableCell>{product.categoryName || '-'}</TableCell>
+                
                       <TableCell>{product.status.toString()}</TableCell>
                       <TableCell className='text-right'>
                         <div className='flex justify-end gap-2'>

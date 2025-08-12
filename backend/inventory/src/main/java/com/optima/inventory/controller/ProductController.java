@@ -24,11 +24,6 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private BrandRepository brandRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
 
     @PostMapping
     public ProductResponseDto createProduct(@RequestBody @Valid ProductResponseDto request) {

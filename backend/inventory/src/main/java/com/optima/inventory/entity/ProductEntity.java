@@ -25,7 +25,7 @@ public class ProductEntity {
     private String seoTitle;
 
     private String description;
-    private Boolean status;
+    private boolean status;
     private String tag;
     private String image;
 
@@ -53,28 +53,36 @@ public class ProductEntity {
     private String metaKeyword;
 
     @Column(name = "create_by")
-    private long createBy;
+    private Long createBy;
 
     @Column(name = "create_at")
     private LocalDateTime createAt;
 
     @Column(name = "update_by")
-    private long updateBy;
+    private Long updateBy;
 
     @Column(name = "update_at")
     private LocalDateTime updateAt;
 
     private Boolean sellable;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "brand_id")
-    private BrandEntity brand;
+    @Column(name = "category_id")
+    private Long categoryId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private CategoryEntity category;
+    @Column(name = "brand_id")
+    private Long brandId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manufacturing_location_id")
-    private ManufacturingLocationEntity manufacturingLocation;
+    @Column(name = "manufacturing_location_id")
+    private Long manufacturingLocationId;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createAt = LocalDateTime.now();
+        this.updateAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updateAt = LocalDateTime.now();
+    }
 }

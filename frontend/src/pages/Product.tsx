@@ -21,18 +21,9 @@ interface Product {
   description: string;
   priceNormal: number;
   status: boolean;
-  brandResponseDto: {
-    id: string;
-    name: string;
-  };
-  categoryResponseDto: {
-    id: string;
-    name: string;
-  };
-  manufacturingLocationResponseDto: {
-    id: string;
-    name: string;
-  };
+  brandName: string;
+  categoryName: string;
+  manufacturingLocationName: string;
 }
 
 

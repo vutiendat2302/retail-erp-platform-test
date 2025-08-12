@@ -17,14 +17,11 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
         Long getId();
         String getName();
         String getDescription();
-        Boolean getStatus();
+        boolean getStatus();
         BigDecimal getPriceNormal();
         String getBrandName();
         String getCategoryName();
         String getManufacturingLocationName();
-        Long getBrandId();
-        Long getCategoryId();
-        Long getManufacturingLocationId();
     }
 
     @Query("""
@@ -34,37 +31,32 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
         a.description as description,
         a.priceNormal as priceNormal,
         a.status as status,
-        a.brand.name as brandName,
-        a.category.name as categoryName,
-        a.manufacturingLocation.name as manufacturingLocationName,
-        a.brand.id as brandId,
-        a.category.id as categoryId,
-        a.manufacturingLocation.id as manufacturingLocationId
+        b.name as brandName,
+        c.name as categoryName,
+        d.name as manufacturingLocationName
+
     from ProductEntity a
-    left join BrandEntity b on a.brand.id = b.id
-    left join CategoryEntity c on a.category.id = c.id
-    left join ManufacturingLocationEntity d on a.manufacturingLocation.id = d.id
+    left join BrandEntity b on a.brandId = b.id
+    left join CategoryEntity c on a.categoryId = c.id
+    left join ManufacturingLocationEntity d on a.manufacturingLocationId = d.id
     """)
 
     List<ProductView> findAllWithBrandCategoryManufacturing();
 
     @Query("""
-    select 
+    select
         a.id as id,
         a.name as name,
         a.description as description,
         a.priceNormal as priceNormal,
         a.status as status,
-        a.brand.name as brandName,
-        a.category.name as categoryName,
-        a.manufacturingLocation.name as manufacturingLocationName,
-        a.brand.id as brandId,
-        a.category.id as categoryId,
-        a.manufacturingLocation.id as manufacturingLocationId
+        b.name as brandName,
+        c.name as categoryName,
+        d.name as manufacturingLocationName
     from ProductEntity a
-    left join BrandEntity b on a.brand.id = b.id
-    left join CategoryEntity c on a.category.id = c.id
-    left join ManufacturingLocationEntity d on a.manufacturingLocation.id = d.id
+    left join BrandEntity b on a.brandId = b.id
+    left join CategoryEntity c on a.categoryId = c.id
+    left join ManufacturingLocationEntity d on a.manufacturingLocationId = d.id
     """)
     Page<ProductView> findAllIn4(Pageable pageable);
 }

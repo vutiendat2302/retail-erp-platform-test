@@ -41,17 +41,14 @@ public class InventoryEntity {
     @Column(name = "suggest_day_minimum_warehouse")
     private LocalDateTime suggestDayMinimumWarehouse;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "batch_id")
-    private ProductBatchEntity productBatchEntity;
+    @Column(name = "batch_id")
+    private Long productBatchId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "warehouse_id")
-    private WarehouseEntity warehouseEntity;
+    @Column(name = "product_id")
+    private Long productId;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private ProductEntity productEntity;
+    @Column(name = "warehouse_id")
+    private Long warehouseId;
 
     @PrePersist
     protected void onCreate() {

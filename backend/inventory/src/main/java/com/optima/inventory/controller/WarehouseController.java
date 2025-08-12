@@ -30,5 +30,8 @@ public class WarehouseController {
         return warehouseService.getWarehouses();
     }
 
-
+    @GetMapping("/{warehouseId}")
+    public WarehouseEntity getWarehouse(@PathVariable Long warehouseId) {
+        return warehouseService.getWarehouse(warehouseId);
+    }
 }

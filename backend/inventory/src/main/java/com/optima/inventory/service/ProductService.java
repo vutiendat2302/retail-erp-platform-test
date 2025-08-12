@@ -26,43 +26,23 @@ public class ProductService {
     private ProductRepository productRepository;
     @Autowired
     private ProductMapper productMapper;
-    @Autowired
-    private BrandRepository brandRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
-    @Autowired
-    private ManufacturingLocationRepository manufacturingLocationRepository;
 
     public ProductService(ProductRepository productRepository,
-                          ProductMapper productMapper,
-                          BrandRepository brandRepository,
-                          CategoryRepository categoryRepository,
-                          ManufacturingLocationRepository manufacturingLocationRepository) {
+                          ProductMapper productMapper) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
-        this.brandRepository = brandRepository;
-        this.categoryRepository = categoryRepository;
-        this.manufacturingLocationRepository = manufacturingLocationRepository;
     }
 
     @Transactional
-    public ProductResponseDto createProduct(ProductResponseDto request) {
-        BrandEntity brand = brandRepository.findById(request.getBrandResponseDto().getId())
-                .orElseThrow(() -> new RuntimeException("Brand not found with ID: " + request.getBrandResponseDto().getId()));
-        CategoryEntity category = categoryRepository.findById(request.getCategoryResponseDto().getId())
-                .orElseThrow(() -> new RuntimeException("Category not found with ID: " + request.getCategoryResponseDto().getId()));
-        ManufacturingLocationEntity manufacturingLocation = manufacturingLocationRepository.findById(request.getManufacturingLocationResponseDto().getId())
-                .orElseThrow(() -> new RuntimeException("Manufacturing Location not found with ID: " + request.getManufacturingLocationResponseDto().getId()));
+    public ProductResponseDto createProduct(ProductResponseDto productResponseDto) {
 
-        ProductEntity productEntity = productMapper.toProduct(request, brand, category, manufacturingLocation);
+        ProductEntity productEntity = productMapper.toProduct(productResponseDto);
 
         long newProductId = SnowflakeIdGenerator.nextId();
         while (productRepository.existsById(newProductId)) {
             newProductId = SnowflakeIdGenerator.nextId();
         }
         productEntity.setId(newProductId);
-
-
 
         return productMapper.toProductResponseDto(productRepository.save(productEntity));
     }
@@ -80,17 +60,9 @@ public class ProductService {
         return productMapper.toProductResponseDto(productEntity);
     }
 
-    public ProductResponseDto updateProduct(long productId, ProductResponseDto request) {
-
-        BrandEntity brand = brandRepository.findById(request.getBrandResponseDto().getId())
-                .orElseThrow(() -> new RuntimeException("Brand not found with ID: " + request.getBrandResponseDto().getId()));
-        CategoryEntity category = categoryRepository.findById(request.getCategoryResponseDto().getId())
-                .orElseThrow(() -> new RuntimeException("Category not found with ID: " + request.getCategoryResponseDto().getId()));
-        ManufacturingLocationEntity manufacturingLocation = manufacturingLocationRepository.findById(request.getManufacturingLocationResponseDto().getId())
-                .orElseThrow(() -> new RuntimeException("Manufacturing Location not found with ID: " + request.getManufacturingLocationResponseDto().getId()));
-        ProductEntity productEntity = productMapper.toProduct(request, brand, category, manufacturingLocation);
-
-        productMapper.updateProduct(productEntity, request, brand, category, manufacturingLocation);
+    public ProductResponseDto updateProduct(long productId, ProductResponseDto productResponseDto) {
+        ProductEntity productEntity = productMapper.toProduct(productResponseDto);
+        productMapper.updateProduct(productEntity, productResponseDto);
         ProductEntity afterUpdateProduct = productRepository.save(productEntity);
         return productMapper.toProductResponseDto(afterUpdateProduct);
     }

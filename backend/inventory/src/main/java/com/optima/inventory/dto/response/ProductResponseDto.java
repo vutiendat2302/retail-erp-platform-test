@@ -1,5 +1,6 @@
 package com.optima.inventory.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.Column;
@@ -14,7 +15,7 @@ public class ProductResponseDto {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    @Column(name = "qr_code")
+    @Column(name = "sku")
     private String sku;
 
     private String name;
@@ -23,7 +24,7 @@ public class ProductResponseDto {
     private String seoTitle;
 
     private String description;
-    private String status;
+    private boolean status;
     private String tag;
 
     @Column(name = "price_normal")
@@ -46,12 +47,17 @@ public class ProductResponseDto {
     private String metaKeyword;
 
     @Column(name = "create_by")
-    private long createBy;
+    private Long createBy;
 
     @Column(name = "update_by")
-    private long updateBy;
+    private Long updateBy;
 
-    private BrandResponseDto brandResponseDto;
-    private CategoryResponseDto categoryResponseDto;
-    private ManufacturingLocationResponseDto manufacturingLocationResponseDto;
+    private String categoryName;
+    private String brandName;
+    private String manufacturingLocationName;
+
+    @JsonGetter("status")
+    public String getStatusString() {
+        return this.status ? "Active" : "Inactive";
+    }
 }

@@ -9,18 +9,9 @@ interface Product {
   description: string;
   priceNormal: number;
   status: boolean;
-  brandResponseDto: {
-    id: string;
-    name: string;
-  };
-  categoryResponseDto: {
-    id: string;
-    name: string;
-  };
-  manufacturingLocationResponseDto: {
-    id: string;
-    name: string;
-  };
+  brandName: string;
+  categoryName: string;
+  manufacturingLocationName: string;
 }
 
 interface ProductFormProps {
@@ -36,18 +27,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
     name: '',
     description: '',
     priceNormal: 0,
-    brandResponseDto: {
-      id: '',
-      name: '',
-    },
-    categoryResponseDto: {
-      id: '',
-      name: '',
-    },
-    manufacturingLocationResponseDto: {
-      id: '',
-      name: '',
-    },
+    brandName: '',
+    categoryName: '',
+    manufacturingLocationName: '',
     status: true,
   });
 
@@ -58,18 +40,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
         name: initialData.name || '',
         description: initialData.description || '',
         priceNormal: initialData.priceNormal || 0,
-        brandResponseDto: {
-          id: initialData.brandResponseDto?.id || '-',
-          name: initialData.brandResponseDto?.name || '-',
-        },
-        categoryResponseDto: {
-          id: initialData.categoryResponseDto?.id || '-',
-          name: initialData.categoryResponseDto?.name || '-',
-        },
-        manufacturingLocationResponseDto: {
-          id: initialData.manufacturingLocationResponseDto?.id || '-',
-          name: initialData.manufacturingLocationResponseDto?.name || '-',
-        },
+        brandName: initialData.brandName || '',
+        categoryName: initialData.categoryName || '',
+        manufacturingLocationName: initialData.manufacturingLocationName || '',
         status: initialData.status,
       });
     } else {
@@ -78,18 +51,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
         name: '',
         description: '',
         priceNormal: 0,
-        brandResponseDto: {
-          id: '',
-          name: '',
-        },
-        categoryResponseDto: {
-          id: '',
-          name: '',
-        },
-        manufacturingLocationResponseDto: {
-          id: '',
-          name: '',
-        },
+        brandName: '',
+        categoryName: '',
+        manufacturingLocationName: '',
         status: true,
           })
         }
@@ -159,7 +123,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
               id="brandName"
               type="text"
               name="brandName"
-              value={formData.brandResponseDto.name}
+              value={formData.brandName}
               onChange={handleChange}
               className="w-full border px-2 py-1 rounded"
               />
@@ -172,7 +136,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                 id="categoryName"
                 type="text"
                 name="categoryName"
-                value={formData.categoryResponseDto.name}
+                value={formData.categoryName}
                 onChange={handleChange}
                 className="w-full border px-2 py-1 rounded"
               />
@@ -186,7 +150,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                 id="manufacturingLocationName"
                 type="text"
                 name="manufacturingLocationName"
-                value={formData.manufacturingLocationResponseDto.name}
+                value={formData.manufacturingLocationName}
                 onChange={handleChange}
                 className="w-full border px-2 py-1 rounded"
               />

@@ -6,7 +6,8 @@ import ProductStatic from '../components/inventory_components/products/ProductSt
 import { ProductSearch } from '../components/inventory_components/products/ProductSearch';
 import { WarehouseChoose } from '../components/inventory_components/warehouses/WarehouseChoose';
 import { getWarehouses } from '../services/inventery-api/WarehouseService';
-
+import { WarehouseTableComponent } from '../components/inventory_components/warehouses/WarehouseTable';
+import { getInventoryByNameWarehouse } from '../services/inventery-api/WarehouseService';
 interface Warehouse {
   id: string;
   name: string;
@@ -17,10 +18,22 @@ interface Warehouse {
   updateBy: string;
 }
 
+interface Inventory {
+  id: string;
+  productName: string;
+  quantityAvailable: number;
+  warehouseName: string;
+  status: string;
+  minimumQuantity: number;
+  maximumQuantity: number;
+  productBatchName: string;
+}
+
 const Warehouse: React.FC = () => {
   const [dataWarehouse, setDataWarehouse] = useState<Warehouse[]>([]);
   const [openFindWarehouse, setOpenWarehouse] = useState(false);
   const [selectWarehouse, setSelectWarehouse] = useState<string | null>('');
+  const [inventories, setInventories] = useState<Inventory[]>([]);
 
   useEffect(() => {
     const fetchWarehouses = async () => {
@@ -39,6 +52,21 @@ const Warehouse: React.FC = () => {
 
     fetchWarehouses();
   }, []);
+
+  useEffect(() => {
+    const fetchInventories = async () => {
+      if (selectWarehouse) {
+        try {
+          const response = await getInventoryByNameWarehouse(selectWarehouse);
+          setInventories(response.data);
+        } catch (error) {
+          console.error("Failed to fetch inventory data: ", error);
+        }
+      }
+    };
+
+    fetchInventories();
+  }, [selectWarehouse]);
 
   return (
     <div>
@@ -68,6 +96,12 @@ const Warehouse: React.FC = () => {
 
         <div>
           <ProductSearch />
+        </div>
+
+        <div className='mt-6'>
+          <WarehouseTableComponent
+            data={inventories}
+          />
         </div>
       </div>
     </div>

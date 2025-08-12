@@ -13,36 +13,16 @@ public class InventoryResponseDto {
 
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
-
-    @Column(name = "warehouse_id")
-    private long warehouseId;
-
-    @Column(name = "product_id")
-    private long productId;
-
-    @Column(name = "quantity_available")
     private int quantityAvailable;
-
-    @Column(name = "minimum_quantity")
     private int minimumQuantity;
-
-    @Column(name = "maximum_quantity")
     private int maximumQuantity;
-
     private boolean status;
-
-    @Column(name = "create_by")
     private long createBy;
-
-    @Column(name = "update_by")
     private long updateBy;
-
-    @Column(name = "suggest_day_minimum_warehouse")
     private LocalDateTime suggestDayMinimumWarehouse;
-
-    private ProductBatchResponseDto productBatchResponseDto;
-    private WarehouseResponseDto warehouseResponseDto;
-    private ProductResponseDto productResponseDto;
+    private String productBatchName;
+    private String productName;
+    private String warehouseName;
 
     @JsonGetter("status")
     public String getStatusString() {
