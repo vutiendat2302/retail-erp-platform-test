@@ -21,9 +21,9 @@ export const updateProduct = (id: string, data: ProductResponseDto) => api.put(`
 
 export const deleteProduct = (id: string) => api.delete(`/api/product/${id}`);
 
+export const getCountProductActive = () => api.get(`/api/product/active`);
 
 // Phân trang
-
 export const getPageProducts = ({
     page = 0,
     size = 5,
@@ -31,3 +31,8 @@ export const getPageProducts = ({
 }: PageParams= {}) => api.get('/api/product/page', {
     params: {page, size, sort},
 });
+
+// Get Brand, Category, ManufacturingLocation
+export const getCategoryName = () => api.get(`/api/category/name`);
+export const getManufacturingName = () => api.get(`/api/manufacturingLocation/name`);
+export const getBrandName = () => api.get(`/api/brand/name`);
