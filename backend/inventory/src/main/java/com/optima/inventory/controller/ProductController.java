@@ -56,6 +56,10 @@ public class ProductController {
         return ResponseEntity.ok(productService.getAllPage(pageable));
     }
 
+    @GetMapping("/active")
+    public int getProductActive() {
+        return productService.getProductActive();
+    }
 }
 
 

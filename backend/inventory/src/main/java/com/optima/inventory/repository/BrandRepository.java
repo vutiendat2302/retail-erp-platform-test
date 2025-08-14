@@ -2,9 +2,23 @@ package com.optima.inventory.repository;
 
 import com.optima.inventory.entity.BrandEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface BrandRepository extends JpaRepository<BrandEntity, Long> {
-    boolean existsByName(String name); // Thông báo ra lỗi khi đã tồn tại tồn tại name
+    public interface BrandView {
+        Long getId();
+        String getName();
+    }
+
+    @Query("""
+    select
+        a.id as id,
+        a.name as name
+    from BrandEntity a
+    """)
+    List<BrandView> getBrandName();
 }

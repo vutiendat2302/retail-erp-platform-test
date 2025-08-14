@@ -23,9 +23,12 @@ public class InventoryResponseDto {
     private String productBatchName;
     private String productName;
     private String warehouseName;
+    private LocalDateTime expiryDate;
+    private LocalDateTime importDate;
+    private int priceNormal;
 
     @JsonGetter("status")
     public String getStatusString() {
-        return this.status ? "Active" : "Inactive";
+        return this.status ? "active" : "inactive";
     }
 }

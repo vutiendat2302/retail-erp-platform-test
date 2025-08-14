@@ -25,7 +25,7 @@ public class WarehouseResponseDto {
 
     @JsonGetter("status")
     public String getStatusString() {
-        return this.status ? "Active" : "Inactive";
+        return this.status ? "active" : "inactive";
     }
 
 }

@@ -78,7 +78,12 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public Page<ProductResponseDto> getAllPage(Pageable pageable) {
         return productRepository.findAllIn4(pageable).map(productMapper::fromProjection);
+    }
+
+    public int getProductActive() {
+        return productRepository.getCountProductActive();
     }
 }
