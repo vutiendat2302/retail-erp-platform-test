@@ -60,4 +60,8 @@ public class CategoryService {
                 .map(categoryMapper::toCategoryName)
                 .collect(Collectors.toList());
     }
+
+    public int getCountCategoryActive() {
+        return categoryRepository.getCountCategoryActive();
+    }
 }

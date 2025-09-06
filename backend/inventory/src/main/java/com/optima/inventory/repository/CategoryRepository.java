@@ -21,4 +21,11 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> 
     from CategoryEntity a
     """)
     List<CategoryNameView> getCategoryName();
+
+    @Query("""
+    select count(a.id)
+    from CategoryEntity a
+    where a.status = true
+    """)
+    int getCountCategoryActive();
 }

@@ -31,4 +31,8 @@ public class BrandService {
                 .map(brandMapper::toBrandName)
                 .collect(Collectors.toList());
     }
+
+    public int getCountBrandActive() {
+        return brandRepository.getCountBrandActive();
+    }
 }

@@ -39,4 +39,9 @@ public class CategoryController {
     public List<CategoryNameResponse> getCategoryName() {
         return categoryService.getCategoryName();
     }
+
+    @GetMapping("/getCountCategoryActive")
+    public int getCountCategoryActive() {
+        return categoryService.getCountCategoryActive();
+    }
 }

@@ -25,4 +25,9 @@ public class BrandController {
     public List<BrandNameResponse> getBrandName() {
         return brandService.getBrandName();
     }
+
+    @GetMapping("/getCountBrandActive")
+    public int getCountBrandActive() {
+        return brandService.getCountBrandActive();
+    }
 }

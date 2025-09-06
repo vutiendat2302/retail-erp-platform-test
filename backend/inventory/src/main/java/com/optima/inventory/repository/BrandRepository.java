@@ -21,4 +21,13 @@ public interface BrandRepository extends JpaRepository<BrandEntity, Long> {
     from BrandEntity a
     """)
     List<BrandView> getBrandName();
+
+    @Query("""
+    select count(a.id)
+    from BrandEntity a
+    where a.status = true
+    """)
+    int getCountBrandActive();
 }
+
+
