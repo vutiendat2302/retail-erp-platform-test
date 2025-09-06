@@ -1,6 +1,7 @@
 create table import_log
 (
-    id               bigint       not null,
+    id               bigint       not null
+        primary key,
     description      varchar(250) null comment 'mô tả, ghi chú',
     from_supplier_id bigint       null comment 'ID nhà cung cấp (FK supplier)',
     to_warehouse_id  bigint       null comment 'ID kho nhập (FK warehouse)',
@@ -11,18 +12,15 @@ create table import_log
     create_by        bigint       null comment 'ID người tạo phiếu',
     create_at        datetime     null comment 'Thời gian tạo phiếu',
     update_by        bigint       null comment 'ID người cập nhật',
-    update_at        datetime     null comment 'Thời gian cập nhật',
-    primary key (id)
+    update_at        datetime     null comment 'Thời gian cập nhật'
 )
     comment 'Bảng ghi nhận các phiếu nhập hàng từ nhà cung cấp về kho';
 
-create index import_log_supplier_id_fk
-    on import_log (from_supplier_id);
 
-create index import_log_warehouse_id_fk
-    on import_log (to_warehouse_id);
 
-ption, from_supplier_id, to_warehouse_id, start_time, end_time, total_amount, status, create_by, create_at, update_by, update_at) VALUES (1949742123554615296, 'Với thì từ thay của của hơn thì thì như cho từ sau vậy nhưng giữa với chưa nhưng đã chưa thay hơn đúng vì.', 1949530256739577856, 1949678187018891264, '2024-08-29 22:45:13', '2024-09-11 22:45:13', 141530240080, 1, 1450492617670998020, '2024-09-17 12:15:07', 1450492617670998019, '2025-07-28 15:02:01');
+INSERT INTO `optima-project-retail-manager`.import_log (id, description, from_supplier_id, to_warehouse_id, start_time, end_time, total_amount, status, create_by, create_at, update_by, update_at) VALUES (1949742123546226688, 'Tại giữa mỗi vì nhiều chưa một đi hơn lớn đúng đã không có là với trong tại để này số trong nhiều giống để vài.', 1949530256680857600, 1949678187006308352, '2024-06-08 14:42:39', '2024-07-06 14:42:39', 155391382760, 1, 1450492617670998016, '2023-12-15 22:44:43', 1450492617670998020, '2025-07-28 15:02:01');
+INSERT INTO `optima-project-retail-manager`.import_log (id, description, from_supplier_id, to_warehouse_id, start_time, end_time, total_amount, status, create_by, create_at, update_by, update_at) VALUES (1949742123550420992, 'Có vài đó nếu người khi mỗi của tự thay các như thay vài không người.', 1949530256680857600, 1949678187014696960, '2024-07-09 17:40:52', '2024-07-29 17:40:52', 99830632916, 1, 1450492617670998017, '2024-06-15 23:55:38', 1450492617670998017, '2025-07-28 15:02:01');
+INSERT INTO `optima-project-retail-manager`.import_log (id, description, from_supplier_id, to_warehouse_id, start_time, end_time, total_amount, status, create_by, create_at, update_by, update_at) VALUES (1949742123554615296, 'Với thì từ thay của của hơn thì thì như cho từ sau vậy nhưng giữa với chưa nhưng đã chưa thay hơn đúng vì.', 1949530256739577856, 1949678187018891264, '2024-08-29 22:45:13', '2024-09-11 22:45:13', 141530240080, 1, 1450492617670998020, '2024-09-17 12:15:07', 1450492617670998019, '2025-07-28 15:02:01');
 INSERT INTO `optima-project-retail-manager`.import_log (id, description, from_supplier_id, to_warehouse_id, start_time, end_time, total_amount, status, create_by, create_at, update_by, update_at) VALUES (1949742123558809600, 'Được hơn khiến chưa lớn cho một hoặc cũng số cách gần dưới gần của đó mà nơi trong bên từ mỗi đó gần là.', 1949530256701829121, 1949678187023085568, '2024-07-21 21:42:34', '2024-08-11 21:42:34', 113891901303, 1, 1450492617670998020, '2024-09-10 07:51:00', 1450492617670998016, '2025-07-28 15:02:01');
 INSERT INTO `optima-project-retail-manager`.import_log (id, description, from_supplier_id, to_warehouse_id, start_time, end_time, total_amount, status, create_by, create_at, update_by, update_at) VALUES (1949742123558809601, 'Thì thì thay bạn tự và các trong như vài để cũng không thế về mỗi tự nếu như tại cũng.', 1949530256701829121, 1949678187027279872, '2023-10-20 12:52:51', '2023-11-11 12:52:51', 119835625716, 1, 1450492617670998018, '2024-04-24 01:56:07', 1450492617670998020, '2025-07-28 15:02:01');
 INSERT INTO `optima-project-retail-manager`.import_log (id, description, from_supplier_id, to_warehouse_id, start_time, end_time, total_amount, status, create_by, create_at, update_by, update_at) VALUES (1949742123563003904, 'Với của một đến từng số hơn có trong của như chỉ như cách chưa có vậy cũng không hoặc chưa để.', 1949530256672468992, 1949678187027279873, '2024-01-11 15:45:11', '2024-01-31 15:45:11', 148799108329, 1, 1450492617670998016, '2024-08-23 04:51:26', 1450492617670998018, '2025-07-28 15:02:01');

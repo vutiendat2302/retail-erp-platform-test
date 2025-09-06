@@ -1,6 +1,7 @@
 create table brand
 (
-    id          bigint       not null,
+    id          bigint       not null
+        primary key,
     name        varchar(100) null,
     description varchar(250) null,
     country     varchar(100) null,
@@ -8,12 +9,12 @@ create table brand
     update_at   datetime     null,
     created_by  bigint       null,
     update_by   bigint       null,
-    status      tinyint(1)   null,
-    primary key (id)
+    status      tinyint(1)   null
 )
     comment 'Bảng lưu các thương hiệu sản phẩm';
 
-rand (id, name, description, country, create_at, update_at, created_by, update_by, status) VALUES (1954784017850478592, 'TH True Milk', 'Hương vị thơm ngon, dễ uống, phù hợp cho mọi lứa tuổi.', 'Pakistan', '2024-06-04 02:12:40', '2025-08-11 12:56:42', 1450492617670998018, 1450492617670998016, 1);
+INSERT INTO `optima-project-retail-manager`.brand (id, name, description, country, create_at, update_at, created_by, update_by, status) VALUES (1954784017825312768, 'Vinamilk', 'Bổ sung canxi và vitamin D, hỗ trợ phát triển chiều cao và sức khỏe xương.', 'Việt Nam', '2025-03-02 15:53:01', '2025-08-11 12:56:42', 1450492617670998018, 1450492617670998020, 1);
+INSERT INTO `optima-project-retail-manager`.brand (id, name, description, country, create_at, update_at, created_by, update_by, status) VALUES (1954784017850478592, 'TH True Milk', 'Hương vị thơm ngon, dễ uống, phù hợp cho mọi lứa tuổi.', 'Pakistan', '2024-06-04 02:12:40', '2025-08-11 12:56:42', 1450492617670998018, 1450492617670998016, 1);
 INSERT INTO `optima-project-retail-manager`.brand (id, name, description, country, create_at, update_at, created_by, update_by, status) VALUES (1954784017871450112, 'Dutch Lady', 'Sản phẩm sữa tươi nguyên chất, được chế biến theo công nghệ hiện đại, giữ trọn dưỡng chất tự nhiên. Hương vị thơm ngon, dễ uống, phù hợp cho mọi lứa tuổi.', 'Việt Nam', '2024-05-09 06:48:30', '2025-08-11 12:56:42', 1450492617670998018, 1450492617670998017, 1);
 INSERT INTO `optima-project-retail-manager`.brand (id, name, description, country, create_at, update_at, created_by, update_by, status) VALUES (1954784017879838720, 'Fami', 'Sản phẩm sữa tươi nguyên chất, được chế biến theo công nghệ hiện đại, giữ trọn dưỡng chất tự nhiên.', 'Guatemala', '2023-10-10 19:36:08', '2025-08-11 12:56:42', 1450492617670998018, 1450492617670998020, 1);
 INSERT INTO `optima-project-retail-manager`.brand (id, name, description, country, create_at, update_at, created_by, update_by, status) VALUES (1954784017884033024, 'Mộc Châu Milk', 'Hương vị thơm ngon, dễ uống, phù hợp cho mọi lứa tuổi.', 'Việt Nam', '2024-09-24 13:28:31', '2025-08-11 12:56:42', 1450492617670998018, 1450492617670998016, 1);

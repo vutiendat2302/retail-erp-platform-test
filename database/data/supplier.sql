@@ -1,6 +1,7 @@
 create table supplier
 (
-    id          bigint       not null,
+    id          bigint       not null
+        primary key,
     name        varchar(150) null,
     email       varchar(150) null,
     address     varchar(150) null,
@@ -9,12 +10,12 @@ create table supplier
     create_at   datetime     null comment 'Thời gian tạo',
     update_by   bigint       null comment 'ID người cập nhật',
     update_at   datetime     null comment 'Thời gian cập nhật',
-    status      tinyint(1)   null comment 'Trạng thái kho: true = hoạt động',
-    primary key (id)
+    status      tinyint(1)   null comment 'Trạng thái kho: true = hoạt động'
 )
     comment 'Bảng lưu thông tin nhà cung cấp';
 
-'john70@mai.net', '400 Jane Làng', 'Cung cấp đa dạng mặt hàng phục vụ nhu cầu của khách hàng.', 1450492617670998018, '2024-11-19 15:56:45', 1450492617670998018, '2025-08-11 13:34:56', 1);
+INSERT INTO `optima-project-retail-manager`.supplier (id, name, email, address, description, create_by, create_at, update_by, update_at, status) VALUES (1954793639743238144, 'Mai và Dương Tập Đoàn', 'tranjane@duong.biz', '7 Jane Ngõ', 'Đối tác tin cậy với dịch vụ giao hàng nhanh chóng và tận tâm.', 1450492617670998019, '2024-05-20 13:03:31', 1450492617670998020, '2025-08-11 13:34:56', 1);
+INSERT INTO `optima-project-retail-manager`.supplier (id, name, email, address, description, create_by, create_at, update_by, update_at, status) VALUES (1954793639760015360, 'Vũ và đối tác Công ty TNHH MTV', 'john70@mai.net', '400 Jane Làng', 'Cung cấp đa dạng mặt hàng phục vụ nhu cầu của khách hàng.', 1450492617670998018, '2024-11-19 15:56:45', 1450492617670998018, '2025-08-11 13:34:56', 1);
 INSERT INTO `optima-project-retail-manager`.supplier (id, name, email, address, description, create_by, create_at, update_by, update_at, status) VALUES (1954793639768403968, 'Phạm và đối tác Công ty Cổ phần', 'obui@duong.com', '719 Jane Đường', 'Cam kết đem đến sản phẩm chất lượng và dịch vụ chăm sóc khách hàng tốt nhất.', 1450492617670998019, '2025-02-23 15:54:05', 1450492617670998017, '2025-08-11 13:34:56', 1);
 INSERT INTO `optima-project-retail-manager`.supplier (id, name, email, address, description, create_by, create_at, update_by, update_at, status) VALUES (1954793639772598272, 'Bùi và đối tác Công ty TNHH MTV', 'vduong@dang.net', '92 John Hẻm', 'Chuyên nhập khẩu và phân phối các sản phẩm uy tín trong ngành.', 1450492617670998018, '2024-09-23 04:52:50', 1450492617670998019, '2025-08-11 13:34:56', 1);
 INSERT INTO `optima-project-retail-manager`.supplier (id, name, email, address, description, create_by, create_at, update_by, update_at, status) VALUES (1954793639772598273, 'Trần Công ty TNHH', 'phamjane@le.com', '190 John Làng', 'Đối tác tin cậy với dịch vụ giao hàng nhanh chóng và tận tâm.', 1450492617670998020, '2024-09-22 06:27:17', 1450492617670998017, '2025-08-11 13:34:56', 1);

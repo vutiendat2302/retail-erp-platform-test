@@ -1,6 +1,7 @@
 create table product_batch
 (
-    id          bigint       not null,
+    id          bigint       not null
+        primary key,
     description varchar(250) null,
     create_by   bigint       null,
     create_at   datetime     null,
@@ -8,12 +9,11 @@ create table product_batch
     update_at   datetime     null,
     import_date datetime     not null,
     expiry_date datetime     null,
-    name        varchar(250) null,
-    primary key (id)
+    name        varchar(250) null
 )
     comment 'Bảng để kiểm soát các lô nhập hàng';
 
-0');
+INSERT INTO `optima-project-retail-manager`.product_batch (id, description, create_by, create_at, update_by, update_at, import_date, expiry_date, name) VALUES (1955441628119740416, 'Lô hàng sản phẩm được nhập vào ngày 2023-12-30. Hạn sử dụng đến ngày 2026-08-07.', 1450492617670998016, '2025-06-17 20:19:49', 1450492617670998019, '2025-08-13 08:29:49', '2023-12-30 00:00:00', '2026-08-07 00:00:00', 'BATCH-2023-12-30');
 INSERT INTO `optima-project-retail-manager`.product_batch (id, description, create_by, create_at, update_by, update_at, import_date, expiry_date, name) VALUES (1955441628144906240, 'Lô hàng sản phẩm được nhập vào ngày 2024-04-25. Hạn sử dụng đến ngày 2026-12-02.', 1450492617670998017, '2024-10-31 19:46:08', 1450492617670998016, '2025-08-13 08:29:49', '2024-04-25 00:00:00', '2026-12-02 00:00:00', 'BATCH-2024-04-25');
 INSERT INTO `optima-project-retail-manager`.product_batch (id, description, create_by, create_at, update_by, update_at, import_date, expiry_date, name) VALUES (1955441628149100544, 'Lô hàng sản phẩm được nhập vào ngày 2024-03-27. Hạn sử dụng đến ngày 2027-04-13.', 1450492617670998016, '2024-07-02 00:46:59', 1450492617670998016, '2025-08-13 08:29:49', '2024-03-27 00:00:00', '2027-04-13 00:00:00', 'BATCH-2024-03-27');
 INSERT INTO `optima-project-retail-manager`.product_batch (id, description, create_by, create_at, update_by, update_at, import_date, expiry_date, name) VALUES (1955441628153294848, 'Lô hàng sản phẩm được nhập vào ngày 2024-01-08. Hạn sử dụng đến ngày 2027-05-17.', 1450492617670998019, '2024-04-10 00:56:05', 1450492617670998020, '2025-08-13 08:29:49', '2024-01-08 00:00:00', '2027-05-17 00:00:00', 'BATCH-2024-01-08');

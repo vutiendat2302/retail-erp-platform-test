@@ -1,6 +1,7 @@
 create table manufacturing_location
 (
-    id          bigint       not null,
+    id          bigint       not null
+        primary key,
     name        varchar(150) null,
     email       varchar(150) null,
     phone       varchar(15)  null,
@@ -10,12 +11,11 @@ create table manufacturing_location
     create_by   bigint       null,
     create_at   datetime     null,
     update_by   bigint       null,
-    update_at   datetime     null,
-    primary key (id)
+    update_at   datetime     null
 )
     comment 'Bảng lưu thông tin các nhà cung cấp sản phẩm';
 
-450492617670998017, '2025-08-11 12:59:45');
+INSERT INTO `optima-project-retail-manager`.manufacturing_location (id, name, email, phone, address, status, description, create_by, create_at, update_by, update_at) VALUES (1954784784485363712, 'Công ty Cổ phần Sữa Việt Nam (Vinamilk)', 'lejohn@bui.com', '+84-89-206545', 'Số 10 Tân Trào, Phường Tân Phú, Quận 7, TP. Hồ Chí Minh', 1, 'Chuyên sản xuất các sản phẩm sữa tươi, sữa bột, sữa chua với chất lượng cao và an toàn.', 1450492617670998019, '2024-09-22 11:45:53', 1450492617670998017, '2025-08-11 12:59:45');
 INSERT INTO `optima-project-retail-manager`.manufacturing_location (id, name, email, phone, address, status, description, create_by, create_at, update_by, update_at) VALUES (1954784784514723840, 'Công ty TNHH Nestlé Việt Nam', 'jane79@nguyen.com', '+84 07 2400106', 'Lô A2, Đường số 2, KCN Biên Hòa II, Đồng Nai', 1, 'Thì giữa về rất cách để lớn vậy lớn có từ thay là từ chưa làm cũng để tôi vậy.', 1450492617670998019, '2023-10-15 09:26:20', 1450492617670998018, '2025-08-11 12:59:45');
 INSERT INTO `optima-project-retail-manager`.manufacturing_location (id, name, email, phone, address, status, description, create_by, create_at, update_by, update_at) VALUES (1954784784518918144, 'Công ty CP Sữa TH (TH True Milk)', 'buijohn@vu.biz', '(00)524-9100', 'Tòa nhà TH, 166 Nguyễn Thái Học, Ba Đình, Hà Nội', 1, 'Chuyên sản xuất các sản phẩm sữa tươi, sữa bột, sữa chua với chất lượng cao và an toàn.', 1450492617670998017, '2025-04-22 04:51:47', 1450492617670998019, '2025-08-11 12:59:45');
 INSERT INTO `optima-project-retail-manager`.manufacturing_location (id, name, email, phone, address, status, description, create_by, create_at, update_by, update_at) VALUES (1954784784523112448, 'Công ty TNHH FrieslandCampina Việt Nam (Dutch Lady)', 'oduong@mai.com', '06 0333083', 'Số 141-145 Đường 15, Phường Tân Thuận Đông, Quận 7, TP. Hồ Chí Minh', 1, 'Từng hơn và để khi cái như để sẽ trong không đến nhưng tại trong đang cũng.', 1450492617670998019, '2024-05-26 20:29:18', 1450492617670998017, '2025-08-11 12:59:45');

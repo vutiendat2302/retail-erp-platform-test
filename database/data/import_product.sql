@@ -1,26 +1,21 @@
 create table import_product
 (
-    id         bigint       not null,
+    id         bigint       not null
+        primary key,
     log_id     bigint       not null comment 'Mã phiếu nhập',
     product_id bigint       not null comment 'ID sản phẩm',
     quantity   int          null comment 'Số lượng nhập',
     price      int          null,
     note       varchar(250) null comment 'Ghi chú',
-    batch_id   bigint       null,
-    primary key (id)
+    batch_id   bigint       null
 )
     comment 'Chi tiết sản phẩm trong từng phiếu nhập kho';
 
-create index fk_import_batch
-    on import_product (batch_id);
 
-create index import_product_import_log_id_fk
-    on import_product (log_id);
 
-create index import_product_product_id_fk
-    on import_product (product_id);
-
-il-manager`.import_product (id, log_id, product_id, quantity, price, note, batch_id) VALUES (1949742123625918464, 1949742123563003904, 1949554483224031232, 12053, 12792, 'Thay với để đã khiến có rất khiến cho được khi vẫn sẽ khiến mà nếu trong giữa từ được theo bạn thì tại từ đã.', 1949698713665843201);
+INSERT INTO `optima-project-retail-manager`.import_product (id, log_id, product_id, quantity, price, note, batch_id) VALUES (1949742123617529856, 1949742123563003904, 1949554480862638080, 13415, 285074, 'Chỉ có bạn nếu cũng của đi cho mỗi từ đã từng thay trong.', 1949698713665843201);
+INSERT INTO `optima-project-retail-manager`.import_product (id, log_id, product_id, quantity, price, note, batch_id) VALUES (1949742123621724160, 1949742123563003904, 1949554482691354624, 12573, 367725, 'Về tôi giữa khi hơn không đi hơn như một vì người làm rất cũng hơn giữa mỗi từng một thay giữa như mà.', 1949698713665843201);
+INSERT INTO `optima-project-retail-manager`.import_product (id, log_id, product_id, quantity, price, note, batch_id) VALUES (1949742123625918464, 1949742123563003904, 1949554483224031232, 12053, 12792, 'Thay với để đã khiến có rất khiến cho được khi vẫn sẽ khiến mà nếu trong giữa từ được theo bạn thì tại từ đã.', 1949698713665843201);
 INSERT INTO `optima-project-retail-manager`.import_product (id, log_id, product_id, quantity, price, note, batch_id) VALUES (1949742123630112768, 1949742123563003904, 1949554480267046912, 13727, 211208, 'Đúng trong chưa chưa các sau tôi theo để bạn cho vẫn cách hơn nơi cũng cũng số người các.', 1949698713665843201);
 INSERT INTO `optima-project-retail-manager`.import_product (id, log_id, product_id, quantity, price, note, batch_id) VALUES (1949742123634307072, 1949742123563003904, 1949554480174772224, 12751, 229214, 'Với được đến vài bên đúng với cho từng cũng nơi đã hoặc trong dưới làm tôi tôi sau để đó từng như.', 1949698713665843201);
 INSERT INTO `optima-project-retail-manager`.import_product (id, log_id, product_id, quantity, price, note, batch_id) VALUES (1949742123638501376, 1949742123563003904, 1949554479319134208, 13173, 98815, 'Của có sau bạn với người chưa chưa theo người lớn thay vẫn dưới gần điều cũng sau có.', 1949698713665843201);

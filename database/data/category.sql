@@ -1,6 +1,7 @@
 create table category
 (
-    id           bigint       not null,
+    id           bigint       not null
+        primary key,
     name         varchar(100) null,
     seo_title    varchar(250) null,
     description  varchar(250) null,
@@ -11,12 +12,12 @@ create table category
     create_at    datetime     null,
     update_by    bigint       null,
     update_at    datetime     null,
-    small_image  varchar(250) null,
-    primary key (id)
+    small_image  varchar(250) null
 )
     comment 'Bảng lưu thông tin các danh mục sản phẩm, hỗ trợ phân cấp danh mục';
 
- update_by, update_at, small_image) VALUES (1954782450267107328, 'Rau- củ -trái cây', 'Rau củ quả tươi sạch, giàu vitamin', 'Rau củ quả tươi ngon, giàu vitamin và khoáng chất, giúp tăng cường sức khỏe và sức đề kháng.', 1, null, 'rau sạch, củ quả, trái cây', 1450492617670998018, '2024-11-24 10:50:42', 1450492617670998020, '2025-08-11 12:50:28', null);
+INSERT INTO `optima-project-retail-manager`.category (id, name, seo_title, description, status, parent_id, meta_keyword, create_by, create_at, update_by, update_at, small_image) VALUES (1954782450229358592, 'Sữa các loại', 'Sữa tươi, sữa bột, sữa chua dinh dưỡng', 'Sữa tươi, sữa bột, sữa chua giàu canxi và vitamin, tốt cho sức khỏe mọi lứa tuổi.', 1, null, 'sữa tươi, sữa bột, sữa chua', 1450492617670998016, '2024-06-15 08:11:22', 1450492617670998019, '2025-08-11 12:50:28', null);
+INSERT INTO `optima-project-retail-manager`.category (id, name, seo_title, description, status, parent_id, meta_keyword, create_by, create_at, update_by, update_at, small_image) VALUES (1954782450267107328, 'Rau- củ -trái cây', 'Rau củ quả tươi sạch, giàu vitamin', 'Rau củ quả tươi ngon, giàu vitamin và khoáng chất, giúp tăng cường sức khỏe và sức đề kháng.', 1, null, 'rau sạch, củ quả, trái cây', 1450492617670998018, '2024-11-24 10:50:42', 1450492617670998020, '2025-08-11 12:50:28', null);
 INSERT INTO `optima-project-retail-manager`.category (id, name, seo_title, description, status, parent_id, meta_keyword, create_by, create_at, update_by, update_at, small_image) VALUES (1954782450271301632, 'Hóa phẩm - tẩy rửa', 'Hóa phẩm, nước tẩy rửa an toàn', 'Hóa phẩm, nước tẩy rửa sạch nhanh, diệt khuẩn hiệu quả, an toàn cho gia đình và môi trường.', 1, null, 'hóa phẩm, tẩy rửa, diệt khuẩn', 1450492617670998017, '2025-03-22 06:14:03', 1450492617670998020, '2025-08-11 12:50:28', null);
 INSERT INTO `optima-project-retail-manager`.category (id, name, seo_title, description, status, parent_id, meta_keyword, create_by, create_at, update_by, update_at, small_image) VALUES (1954782450275495936, 'Chăm sóc cá nhân', 'Sản phẩm chăm sóc cá nhân chất lượng', 'Dầu gội, sữa tắm, kem đánh răng… chăm sóc cơ thể toàn diện, an toàn cho da và tóc.', 1, null, 'chăm sóc cá nhân, dầu gội, sữa tắm', 1450492617670998020, '2025-05-12 07:24:18', 1450492617670998019, '2025-08-11 12:50:28', null);
 INSERT INTO `optima-project-retail-manager`.category (id, name, seo_title, description, status, parent_id, meta_keyword, create_by, create_at, update_by, update_at, small_image) VALUES (1954782450275495937, 'Thịt - hải sản tươi', 'Thịt tươi, hải sản tươi ngon', 'Thịt heo, bò, gà và hải sản tươi sống, đảm bảo chất lượng và an toàn vệ sinh thực phẩm.', 1, null, 'thịt tươi, hải sản, thực phẩm tươi', 1450492617670998018, '2023-10-06 10:39:32', 1450492617670998019, '2025-08-11 12:50:28', null);

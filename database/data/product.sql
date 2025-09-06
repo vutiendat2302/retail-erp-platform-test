@@ -1,6 +1,7 @@
 create table product
 (
-    id                        bigint        not null,
+    id                        bigint        not null
+        primary key,
     sku                       varchar(250)  null comment 'mã vạch',
     name                      varchar(100)  null,
     seo_title                 varchar(250)  null comment 'tiêu đề',
@@ -25,21 +26,15 @@ create table product
     create_at                 datetime      null,
     update_by                 bigint        null,
     update_at                 datetime      null,
-    sellable                  tinyint(1)    null comment 'có được bán trực tiếp hay không',
-    primary key (id)
+    sellable                  tinyint(1)    null comment 'có được bán trực tiếp hay không'
 )
     comment 'Bảng lưu thông tin chi tiết các sản phẩm';
 
-create index product_ibfk_1
-    on product (category_id);
 
-create index product_ibfk_2
-    on product (brand_id);
 
-create index product_ibfk_3
-    on product (manufacturing_location_id);
-
-, view_count, category_id, brand_id, manufacturing_location_id, meta_keyword, create_by, create_at, update_by, update_at, sellable) VALUES (1954792971150209024, 'PMC-SCL-88', 'Phô mai Con Bò Cười', 'Phô mai Con Bò Cười - Sản phẩm chất lượng, giá tốt', 'Phô mai Con Bò Cười là sản phẩm nổi bật với phô mai con cười. Cam kết chất lượng và giá thành hợp lý.', 1, 'phô, mai, con, cười', 'https://placekitten.com/739/329', null, 439670, 547192, 512408, 0.030, 41.580, '2 tháng', null, 11231, 1954782450229358592, 1954784017825312768, 1954784784527306752, 'phô, mai, con, cười, nhưng', 1450492617670998017, '2024-05-03 04:56:38', 1450492617670998017, '2025-08-11 13:32:17', 1);
+INSERT INTO `optima-project-retail-manager`.product (id, sku, name, seo_title, description, status, tag, image, list_image, price_normal, price_sell, promotion_price, vat, weight, warranty, hot, view_count, category_id, brand_id, manufacturing_location_id, meta_keyword, create_by, create_at, update_by, update_at, sellable) VALUES (1954792970974048256, 'SĐN-SCL-97', 'Sữa đậu nành Fami', 'Sữa đậu nành Fami - Tươi ngon, bổ dưỡng', 'Sữa đậu nành Fami là sản phẩm nổi bật với sữa đậu nành fami. Cam kết chất lượng và giá thành hợp lý.', 1, 'sữa, đậu, nành, fami', 'https://dummyimage.com/268x43', null, 137331, 210477, 183174, 0.040, 12.280, '11 tháng', null, 7093, 1954782450229358592, 1954784017900810241, 1954784784556666880, 'sữa, đậu, nành, fami, đúng', 1450492617670998016, '2023-11-28 21:54:50', 1450492617670998018, '2025-08-11 13:32:17', 1);
+INSERT INTO `optima-project-retail-manager`.product (id, sku, name, seo_title, description, status, tag, image, list_image, price_normal, price_sell, promotion_price, vat, weight, warranty, hot, view_count, category_id, brand_id, manufacturing_location_id, meta_keyword, create_by, create_at, update_by, update_at, sellable) VALUES (1954792971133431808, 'SCV-SCL-63', 'Sữa chua Vinamilk', 'Sữa chua Vinamilk - Tươi ngon, bổ dưỡng', 'Sữa chua Vinamilk là sản phẩm nổi bật với sữa chua vinamilk. Cam kết chất lượng và giá thành hợp lý.', 1, 'sữa, chua, vinamilk', 'https://placekitten.com/749/28', null, 427924, 492796, 446885, 0.080, 6.520, '8 tháng', null, 9391, 1954782450229358592, 1954784017888227329, 1954784784552472577, 'sữa, chua, vinamilk, giống, như', 1450492617670998017, '2024-07-05 11:35:14', 1450492617670998018, '2025-08-11 13:32:17', 1);
+INSERT INTO `optima-project-retail-manager`.product (id, sku, name, seo_title, description, status, tag, image, list_image, price_normal, price_sell, promotion_price, vat, weight, warranty, hot, view_count, category_id, brand_id, manufacturing_location_id, meta_keyword, create_by, create_at, update_by, update_at, sellable) VALUES (1954792971150209024, 'PMC-SCL-88', 'Phô mai Con Bò Cười', 'Phô mai Con Bò Cười - Sản phẩm chất lượng, giá tốt', 'Phô mai Con Bò Cười là sản phẩm nổi bật với phô mai con cười. Cam kết chất lượng và giá thành hợp lý.', 1, 'phô, mai, con, cười', 'https://placekitten.com/739/329', null, 439670, 547192, 512408, 0.030, 41.580, '2 tháng', null, 11231, 1954782450229358592, 1954784017825312768, 1954784784527306752, 'phô, mai, con, cười, nhưng', 1450492617670998017, '2024-05-03 04:56:38', 1450492617670998017, '2025-08-11 13:32:17', 1);
 INSERT INTO `optima-project-retail-manager`.product (id, sku, name, seo_title, description, status, tag, image, list_image, price_normal, price_sell, promotion_price, vat, weight, warranty, hot, view_count, category_id, brand_id, manufacturing_location_id, meta_keyword, create_by, create_at, update_by, update_at, sellable) VALUES (1954792971158597632, 'SCG-SCL-59', 'Sữa Cô Gái Hà Lan', 'Sữa Cô Gái Hà Lan - Tươi ngon, bổ dưỡng', 'Sữa Cô Gái Hà Lan là sản phẩm nổi bật với sữa gái lan. Cam kết chất lượng và giá thành hợp lý.', 1, 'sữa, gái, lan', 'https://placekitten.com/115/205', null, 465196, 567352, 519969, 0.050, 43.790, '12 tháng', null, 34080, 1954782450229358592, 1954784017879838720, 1954784784523112448, 'sữa, gái, lan, khi, thì', 1450492617670998017, '2024-07-18 10:12:45', 1450492617670998019, '2025-08-11 13:32:17', 1);
 INSERT INTO `optima-project-retail-manager`.product (id, sku, name, seo_title, description, status, tag, image, list_image, price_normal, price_sell, promotion_price, vat, weight, warranty, hot, view_count, category_id, brand_id, manufacturing_location_id, meta_keyword, create_by, create_at, update_by, update_at, sellable) VALUES (1954792971171180544, 'SVT-SCL-40', 'Sữa Vinamilk tươi tiệt trùng', 'Sữa Vinamilk tươi tiệt trùng - Tươi ngon, bổ dưỡng', 'Sữa Vinamilk tươi tiệt trùng là sản phẩm nổi bật với sữa vinamilk tươi tiệt trùng. Cam kết chất lượng và giá thành hợp lý.', 1, 'sữa, vinamilk, tươi, tiệt, trùng', 'https://picsum.photos/362/680', null, 286785, 335259, 320506, 0.020, 36.600, '10 tháng', null, 43969, 1954782450229358592, 1954784017871450112, 1954784784539889665, 'sữa, vinamilk, tươi, tiệt, trùng', 1450492617670998017, '2024-08-06 23:34:44', 1450492617670998016, '2025-08-11 13:32:17', 1);
 INSERT INTO `optima-project-retail-manager`.product (id, sku, name, seo_title, description, status, tag, image, list_image, price_normal, price_sell, promotion_price, vat, weight, warranty, hot, view_count, category_id, brand_id, manufacturing_location_id, meta_keyword, create_by, create_at, update_by, update_at, sellable) VALUES (1954792971179569152, 'YD-SCL-32', 'YoMost dâu', 'YoMost dâu - Sản phẩm chất lượng, giá tốt', 'YoMost dâu là sản phẩm nổi bật với yomost dâu. Cam kết chất lượng và giá thành hợp lý.', 1, 'yomost, dâu', 'https://placekitten.com/631/158', null, 289786, 383987, 335818, 0.030, 12.000, '12 tháng', null, 11666, 1954782450229358592, 1954784017871450112, 1954784784552472577, 'yomost, dâu, cũng, rất, thế', 1450492617670998017, '2024-08-15 19:02:31', 1450492617670998018, '2025-08-11 13:32:17', 1);

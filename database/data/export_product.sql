@@ -1,24 +1,20 @@
 create table export_product
 (
-    id         bigint not null,
+    id         bigint not null
+        primary key,
     log_id     bigint null comment 'ID phiếu xuất (liên kết với export_log)',
     product_id bigint null comment 'ID sản phẩm được xuất',
     quantity   int    null comment 'Số lượng sản phẩm xuất',
-    batch_id   bigint null comment 'ID lô hàng tương ứng',
-    primary key (id)
+    batch_id   bigint null comment 'ID lô hàng tương ứng'
 )
     comment 'Chi tiết sản phẩm trong phiếu xuất hàng';
 
-create index fk_export_batch
-    on export_product (batch_id);
 
-create index fk_export_log
-    on export_product (log_id);
 
-create index fk_export_product
-    on export_product (product_id);
-
-il-manager`.export_product (id, log_id, product_id, quantity, batch_id) VALUES (1949750730778128385, 1949750730715213824, 1949554480057331712, 267, 1949698713649065985);
+INSERT INTO `optima-project-retail-manager`.export_product (id, log_id, product_id, quantity, batch_id) VALUES (1949750730769739776, 1949750730715213824, 1949554481030410240, 259, 1949698713649065985);
+INSERT INTO `optima-project-retail-manager`.export_product (id, log_id, product_id, quantity, batch_id) VALUES (1949750730773934080, 1949750730715213824, 1949554481189793792, 220, 1949698713649065985);
+INSERT INTO `optima-project-retail-manager`.export_product (id, log_id, product_id, quantity, batch_id) VALUES (1949750730778128384, 1949750730715213824, 1949554482926235648, 117, 1949698713649065985);
+INSERT INTO `optima-project-retail-manager`.export_product (id, log_id, product_id, quantity, batch_id) VALUES (1949750730778128385, 1949750730715213824, 1949554480057331712, 267, 1949698713649065985);
 INSERT INTO `optima-project-retail-manager`.export_product (id, log_id, product_id, quantity, batch_id) VALUES (1949750730782322688, 1949750730715213824, 1949554482129317888, 181, 1949698713649065985);
 INSERT INTO `optima-project-retail-manager`.export_product (id, log_id, product_id, quantity, batch_id) VALUES (1949750730782322689, 1949750730715213824, 1949554480317378560, 163, 1949698713649065985);
 INSERT INTO `optima-project-retail-manager`.export_product (id, log_id, product_id, quantity, batch_id) VALUES (1949750730786516992, 1949750730715213824, 1949554480984272896, 102, 1949698713649065985);

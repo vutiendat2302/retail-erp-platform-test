@@ -1,6 +1,7 @@
 create table inventory
 (
-    id                            bigint              not null,
+    id                            bigint              not null
+        primary key,
     warehouse_id                  bigint              not null,
     product_id                    bigint              not null,
     quantity_available            int default 0       null comment 'so luong hien co trong kho',
@@ -12,21 +13,15 @@ create table inventory
     update_at                     datetime            null,
     update_by                     bigint              null,
     suggest_day_minimum_warehouse datetime            null,
-    batch_id                      bigint              not null,
-    primary key (id)
+    batch_id                      bigint              not null
 )
     comment 'bang quan ly ton kho cua cac san pham';
 
-create index fk_batch_inventory
-    on inventory (batch_id);
 
-create index inventory_product_id_fk
-    on inventory (product_id);
 
-create index inventory_warehouse_id_fk
-    on inventory (warehouse_id);
-
-'2025-08-13 08:30:30', 1450492617670998016, null, 1955441628161683456);
+INSERT INTO `optima-project-retail-manager`.inventory (id, warehouse_id, product_id, quantity_available, minimum_quantity, maximum_quantity, status, create_by, create_at, update_at, update_by, suggest_day_minimum_warehouse, batch_id) VALUES (1955441802850250752, 1954794442830819328, 1954792975709417472, 5074, 153, 15000, 1, 1450492617670998018, '2024-11-06 23:52:39', '2025-08-13 08:30:30', 1450492617670998017, null, 1955441628186849280);
+INSERT INTO `optima-project-retail-manager`.inventory (id, warehouse_id, product_id, quantity_available, minimum_quantity, maximum_quantity, status, create_by, create_at, update_at, update_by, suggest_day_minimum_warehouse, batch_id) VALUES (1955441802854445056, 1954794442830819328, 1954792972442054656, 509, 104, 15000, 1, 1450492617670998016, '2023-11-12 22:35:45', '2025-08-13 08:30:30', 1450492617670998018, null, 1955441628191043585);
+INSERT INTO `optima-project-retail-manager`.inventory (id, warehouse_id, product_id, quantity_available, minimum_quantity, maximum_quantity, status, create_by, create_at, update_at, update_by, suggest_day_minimum_warehouse, batch_id) VALUES (1955441802858639360, 1954794442830819329, 1954792974467903488, 8528, 120, 15000, 1, 1450492617670998020, '2023-12-11 03:57:59', '2025-08-13 08:30:30', 1450492617670998016, null, 1955441628161683456);
 INSERT INTO `optima-project-retail-manager`.inventory (id, warehouse_id, product_id, quantity_available, minimum_quantity, maximum_quantity, status, create_by, create_at, update_at, update_by, suggest_day_minimum_warehouse, batch_id) VALUES (1955441802862833664, 1954794442793070592, 1954792972278476800, 2102, 174, 15000, 1, 1450492617670998020, '2024-10-21 05:55:27', '2025-08-13 08:30:30', 1450492617670998017, null, 1955441628186849280);
 INSERT INTO `optima-project-retail-manager`.inventory (id, warehouse_id, product_id, quantity_available, minimum_quantity, maximum_quantity, status, create_by, create_at, update_at, update_by, suggest_day_minimum_warehouse, batch_id) VALUES (1955441802867027968, 1954794442826625024, 1954792973503213568, 4456, 162, 15000, 1, 1450492617670998016, '2023-11-02 13:30:33', '2025-08-13 08:30:30', 1450492617670998019, null, 1955441628149100544);
 INSERT INTO `optima-project-retail-manager`.inventory (id, warehouse_id, product_id, quantity_available, minimum_quantity, maximum_quantity, status, create_by, create_at, update_at, update_by, suggest_day_minimum_warehouse, batch_id) VALUES (1955441802871222272, 1954794442818236416, 1954792971733217280, 7423, 139, 15000, 1, 1450492617670998019, '2024-05-14 10:45:53', '2025-08-13 08:30:30', 1450492617670998018, null, 1955441628153294848);

@@ -1,25 +1,20 @@
 create table return_product
 (
-    id            bigint not null,
+    id            bigint not null
+        primary key,
     return_log_id bigint not null comment 'fk toi return_log',
     product_id    bigint not null comment 'fk toi product id',
     quantity      int    not null comment 'so luong tra',
     unit_price    int    null,
-    batch_id      bigint null,
-    primary key (id)
+    batch_id      bigint null
 )
     comment 'Chi tien san pham duoc tra theo phieu tra hang';
 
-create index fk_return_batch
-    on return_product (batch_id);
 
-create index return_product_product_id_fk
-    on return_product (product_id);
 
-create index return_product_return_log_id_fk
-    on return_product (return_log_id);
-
-1328, 1954792974400794624, 805, 150811, 1949698713665843201);
+INSERT INTO `optima-project-retail-manager`.return_product (id, return_log_id, product_id, quantity, unit_price, batch_id) VALUES (1954795962800451584, 1954795962741731328, 1954792971259260928, 938, 358404, 1949698713665843201);
+INSERT INTO `optima-project-retail-manager`.return_product (id, return_log_id, product_id, quantity, unit_price, batch_id) VALUES (1954795962813034496, 1954795962741731328, 1954792971842269184, 693, 262904, 1949698713665843201);
+INSERT INTO `optima-project-retail-manager`.return_product (id, return_log_id, product_id, quantity, unit_price, batch_id) VALUES (1954795962817228800, 1954795962741731328, 1954792974400794624, 805, 150811, 1949698713665843201);
 INSERT INTO `optima-project-retail-manager`.return_product (id, return_log_id, product_id, quantity, unit_price, batch_id) VALUES (1954795962817228801, 1954795962741731328, 1954792975583588352, 733, 384362, 1949698713665843201);
 INSERT INTO `optima-project-retail-manager`.return_product (id, return_log_id, product_id, quantity, unit_price, batch_id) VALUES (1954795962821423104, 1954795962741731328, 1954792974702784512, 547, 312443, 1949698713665843201);
 INSERT INTO `optima-project-retail-manager`.return_product (id, return_log_id, product_id, quantity, unit_price, batch_id) VALUES (1954795962825617408, 1954795962741731328, 1954792972383334400, 726, 222506, 1949698713665843201);

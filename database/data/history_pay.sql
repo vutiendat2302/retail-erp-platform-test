@@ -1,6 +1,7 @@
 create table history_pay
 (
-    id        bigint               not null,
+    id        bigint               not null
+        primary key,
     log_id    bigint               not null comment 'Khóa ngoại tới import_log.id',
     time_pay  datetime             null comment 'Thời gian thanh toán',
     method    varchar(250)         null comment 'Phương thức thanh toán: tiền mặt, chuyển khoản, v.v.',
@@ -9,15 +10,15 @@ create table history_pay
     create_by bigint               null comment 'Người tạo',
     create_at datetime             null,
     update_by bigint               null comment 'Người cập nhật',
-    update_at datetime             null,
-    primary key (id)
+    update_at datetime             null
 )
     comment 'Lịch sử các lần thanh toán cho phiếu nhập hàng';
 
-create index history_pay_import_log_id_fk
-    on history_pay (log_id);
 
-rypto', 1, 99830632916, 1450492617670998016, '2024-08-16 02:18:03', 1450492617670998018, '2025-07-28 15:03:26');
+
+INSERT INTO `optima-project-retail-manager`.history_pay (id, log_id, time_pay, method, status, amount, create_by, create_at, update_by, update_at) VALUES (1949742479873323008, 1949742123563003904, '2025-07-28 06:23:13', 'credit card', 1, 148799108329, 1450492617670998019, '2024-07-12 16:51:19', 1450492617670998020, '2025-07-28 15:03:26');
+INSERT INTO `optima-project-retail-manager`.history_pay (id, log_id, time_pay, method, status, amount, create_by, create_at, update_by, update_at) VALUES (1949742479885905920, 1949742123546226688, '2025-07-28 05:25:24', 'paypal', 1, 155391382760, 1450492617670998019, '2025-01-29 10:27:28', 1450492617670998017, '2025-07-28 15:03:26');
+INSERT INTO `optima-project-retail-manager`.history_pay (id, log_id, time_pay, method, status, amount, create_by, create_at, update_by, update_at) VALUES (1949742479890100224, 1949742123550420992, '2025-07-27 06:40:21', 'crypto', 1, 99830632916, 1450492617670998016, '2024-08-16 02:18:03', 1450492617670998018, '2025-07-28 15:03:26');
 INSERT INTO `optima-project-retail-manager`.history_pay (id, log_id, time_pay, method, status, amount, create_by, create_at, update_by, update_at) VALUES (1949742479894294528, 1949742123571392513, '2025-07-28 01:28:07', 'debit card', 1, 149925543897, 1450492617670998020, '2024-08-19 20:48:35', 1450492617670998017, '2025-07-28 15:03:26');
 INSERT INTO `optima-project-retail-manager`.history_pay (id, log_id, time_pay, method, status, amount, create_by, create_at, update_by, update_at) VALUES (1949742479898488832, 1949742123567198208, '2025-07-25 05:21:07', 'credit card', 1, 135773204424, 1450492617670998020, '2025-07-27 07:32:46', 1450492617670998020, '2025-07-28 15:03:26');
 INSERT INTO `optima-project-retail-manager`.history_pay (id, log_id, time_pay, method, status, amount, create_by, create_at, update_by, update_at) VALUES (1949742479902683136, 1949742123558809600, '2025-07-26 11:34:53', 'debit card', 1, 113891901303, 1450492617670998020, '2023-12-26 07:33:58', 1450492617670998017, '2025-07-28 15:03:26');
