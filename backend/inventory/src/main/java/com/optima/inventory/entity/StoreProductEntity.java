@@ -41,5 +41,11 @@ public class StoreProductEntity {
     @Column(name = "batch_id")
     private long batchId;
 
+    @Column(name = "max_quantity")
+    private int maxQuantity;
+
+    @Column(name = "min_quantity")
+    private int minQuantity;
+
     private Boolean status;
 }

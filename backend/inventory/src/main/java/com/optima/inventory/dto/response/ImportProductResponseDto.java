@@ -1,27 +1,22 @@
 package com.optima.inventory.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class StoreResponseDto {
+public class ImportProductResponseDto {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
-    private String name;
-    private String address;
-    private String description;
-    private Long createBy;
-    private Long updateBy;
-    private boolean status;
-
-    @JsonGetter("status")
-    public String getStatusString() {
-        return this.status ? "active" : "inactive";
-    }
+    private Long logId;
+    private Long productId;
+    private int quantity;
+    private long price;
+    private String note;
+    private Long batchId;
 }

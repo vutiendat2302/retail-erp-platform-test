@@ -1,6 +1,7 @@
 package com.optima.inventory.service;
 
 import com.optima.inventory.dto.request.InventoryRequestDto;
+import com.optima.inventory.dto.response.ImportProductResponseDto;
 import com.optima.inventory.dto.response.InventoryResponseDto;
 import com.optima.inventory.entity.InventoryEntity;
 import com.optima.inventory.mapper.InventoryMapper;
@@ -32,7 +33,7 @@ public class InventoryService {
     public InventoryResponseDto createInventory(InventoryResponseDto inventoryResponseDto) {
         InventoryEntity inventoryEntity = inventoryMapper.toInventory(inventoryResponseDto);
 
-        long newProductId = SnowflakeIdGenerator.nextId();
+        Long newProductId = SnowflakeIdGenerator.nextId();
         while (inventoryRepository.existsById(newProductId)) {
             newProductId = SnowflakeIdGenerator.nextId();
         }

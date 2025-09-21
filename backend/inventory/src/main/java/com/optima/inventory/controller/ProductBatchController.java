@@ -14,16 +14,16 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
-@RequestMapping("/api/product_batch")
+@RequestMapping("/api/productBatch")
 public class ProductBatchController {
     @Autowired
     private ProductBatchService productBatchService;
     @Autowired
     private ProductBatchRepository productBatchRepository;
 
-    @PostMapping
-    public ProductBatchEntity createProductBatch(@RequestBody @Valid ProductBatchRequestDto request) {
-        return productBatchService.createProductBatch(request);
+    @PostMapping("/createProductBatch")
+    public ProductBatchResponseDto createProductBatch(@RequestBody @Valid ProductBatchResponseDto productBatchResponseDto) {
+        return productBatchService.createProductBatch(productBatchResponseDto);
     }
 
     @GetMapping
@@ -32,7 +32,7 @@ public class ProductBatchController {
     }
 
     @GetMapping("/{productBatchId}")
-    public ProductBatchEntity getProductBatch(@PathVariable("productBatchId") long productBatchId) {
+    public ProductBatchEntity getProductBatch(@PathVariable("productBatchId") Long productBatchId) {
         return productBatchService.getProductBatch(productBatchId);
     }
 

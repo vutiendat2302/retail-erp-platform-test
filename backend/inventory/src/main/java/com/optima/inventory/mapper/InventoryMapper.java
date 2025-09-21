@@ -12,6 +12,7 @@ import com.optima.inventory.entity.WarehouseEntity;
 import com.optima.inventory.repository.InventoryRepository;
 import com.optima.inventory.repository.ProductRepository;
 import org.mapstruct.*;
+import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface InventoryMapper {
@@ -24,6 +25,8 @@ public interface InventoryMapper {
     InventoryResponseDto toInventoryResponseDto(InventoryEntity inventoryEntity);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target="createAt", ignore = true)
+    @Mapping(target = "updateAt", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateInventory(@MappingTarget InventoryEntity inventoryEntity, InventoryResponseDto inventoryResponseDto);
 

@@ -3,21 +3,26 @@ package com.optima.inventory.entity;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.*;
-import lombok.Cleanup;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "product_batch")
 @Data
-public class ProductBatchEntity {
+@Table(name = "history_pay")
+public class HistoryPayEntity {
     @Id
     @JsonSerialize(using = ToStringSerializer.class)
-    private long id;
-    private String description;
+    private Long id;
 
-    private String name;
+    @Column(name = "time_pay")
+    private LocalDateTime timePay;
+
+    @Column(name = "log_id")
+    private Long logId;
+
+    private String method;
+    private Long amount;
 
     @Column(name = "create_by")
     private long createBy;
@@ -31,8 +36,7 @@ public class ProductBatchEntity {
     @Column(name = "update_at")
     private LocalDateTime updateAt;
 
-    @Column(name = "import_date")
-    private LocalDateTime importDate;
+    private boolean status;
 
     @PrePersist
     protected void onCreate() {

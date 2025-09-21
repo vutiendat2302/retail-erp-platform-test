@@ -77,4 +77,5 @@ public class InventoryController {
     ) {
         return ResponseEntity.ok(inventoryService.getSearchAllIn4(warehouseId,productName, productBatch, pageable));
     }
+
 }

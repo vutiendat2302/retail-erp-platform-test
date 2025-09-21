@@ -7,6 +7,7 @@ import com.optima.inventory.entity.ManufacturingLocationEntity;
 import com.optima.inventory.entity.ProductEntity;
 import com.optima.inventory.repository.ProductRepository;
 import org.mapstruct.*;
+import org.mapstruct.Mapper;
 
 
 @Mapper(componentModel = "spring")

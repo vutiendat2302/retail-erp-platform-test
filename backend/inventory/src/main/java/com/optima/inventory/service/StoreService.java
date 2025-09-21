@@ -40,4 +40,12 @@ public class StoreService {
                 .collect(Collectors.toList());
     }
 
+    public int getTotalProducts(Long storeId) {
+        return storeRepository.getTotalProducts(storeId);
+    }
+
+    public long getTotalPrices(Long storeId) {
+        return storeRepository.getTotalPrices(storeId);
+    }
+
 }

@@ -33,6 +33,7 @@ public class StoreEntity {
     @Column(name = "update_at")
     private LocalDateTime updateAt;
 
+
     private boolean status;
 
     @PrePersist

@@ -3,6 +3,7 @@ package com.optima.inventory.mapper;
 import com.optima.inventory.dto.response.WarehouseResponseDto;
 import com.optima.inventory.entity.WarehouseEntity;
 import org.mapstruct.*;
+import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface WarehouseMapper {

@@ -12,9 +12,12 @@ import org.springframework.stereotype.Repository;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface InventoryRepository extends JpaRepository<InventoryEntity, Long> {
+
+    Optional<InventoryEntity> findByWarehouseIdAndProductIdAndProductBatchId(Long warehouseId, Long productId, Long productBatchId);
 
     public interface InventoryView {
         Long getId();
@@ -41,7 +44,6 @@ public interface InventoryRepository extends JpaRepository<InventoryEntity, Long
         b.name as productBatchName,
         c.name as productName,
         d.name as warehouseName,
-        b.expiryDate as expiryDate,
         b.importDate as importDate,
         c.priceNormal as priceNormal
     from InventoryEntity a
@@ -63,7 +65,6 @@ public interface InventoryRepository extends JpaRepository<InventoryEntity, Long
         b.name as productBatchName,
         c.name as productName,
         d.name as warehouseName,
-        b.expiryDate as expiryDate,
         b.importDate as importDate,
         c.priceNormal as priceNormal
     from InventoryEntity a
@@ -108,7 +109,7 @@ public interface InventoryRepository extends JpaRepository<InventoryEntity, Long
     join ProductBatchEntity b on a.productBatchId = b.id
     join ProductEntity c on a.productId = c.id
     join WarehouseEntity d on d.id = a.warehouseId
-    where d.id = :warehouseId and b.expiryDate < :afterTimeNow
+    where d.id = :warehouseId
     """)
     int getCountProductsNearExpiry(@Param("warehouseId") Long warehouseId,
                                         @Param("afterTimeNow") LocalDateTime afterTimeNow
@@ -134,7 +135,6 @@ public interface InventoryRepository extends JpaRepository<InventoryEntity, Long
         b.name as productBatchName,
         c.name as productName,
         d.name as warehouseName,
-        b.expiryDate as expiryDate,
         b.importDate as importDate,
         c.priceNormal as priceNormal,
         e.name as manufacturingLocation

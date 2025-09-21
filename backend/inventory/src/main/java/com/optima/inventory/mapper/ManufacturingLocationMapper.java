@@ -7,6 +7,7 @@ import com.optima.inventory.dto.response.ManufacturingLocationResponseDto;
 import com.optima.inventory.entity.ManufacturingLocationEntity;
 import com.optima.inventory.repository.ManufacturingLocationRepository;
 import org.mapstruct.*;
+import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring")

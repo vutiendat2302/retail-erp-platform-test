@@ -7,11 +7,14 @@ import com.optima.inventory.dto.response.ProductBatchResponseDto;
 import com.optima.inventory.entity.ProductBatchEntity;
 import com.optima.inventory.repository.ProductBatchRepository;
 import org.mapstruct.*;
+import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface ProductBatchMapper {
     @Mapping(target = "id", ignore = true)
-    ProductBatchEntity toProductBatch(ProductBatchRequestDto request);
+    ProductBatchEntity toProductBatch(ProductBatchResponseDto productBatchResponseDto);
+
+    ProductBatchResponseDto toProductBatchDto(ProductBatchEntity productBatchEntity);
 
     @Mapping(target = "id", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

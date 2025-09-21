@@ -23,8 +23,8 @@ public class ProductBatchService {
     private ProductBatchMapper productBatchMapper;
 
     @Transactional
-    public ProductBatchEntity createProductBatch(ProductBatchRequestDto request) {
-        ProductBatchEntity productBatchEntity = productBatchMapper.toProductBatch(request);
+    public ProductBatchResponseDto createProductBatch(ProductBatchResponseDto productBatchResponseDto) {
+        ProductBatchEntity productBatchEntity = productBatchMapper.toProductBatch(productBatchResponseDto);
 
         long newProductBatchId = SnowflakeIdGenerator.nextId();
         while (productBatchRepository.existsById(newProductBatchId)) {
@@ -32,7 +32,7 @@ public class ProductBatchService {
         }
         productBatchEntity.setId(newProductBatchId);
 
-        return productBatchRepository.save(productBatchEntity);
+        return productBatchMapper.toProductBatchDto(productBatchRepository.save(productBatchEntity));
     }
 
     public List<ProductBatchEntity> getProductBatches() {

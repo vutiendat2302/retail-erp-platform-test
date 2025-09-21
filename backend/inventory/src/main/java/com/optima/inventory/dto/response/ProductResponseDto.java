@@ -44,6 +44,7 @@ public class ProductResponseDto {
     private Long manufacturingLocationId;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
+    private int expiration;
 
     @JsonGetter("status")
     public String getStatusString() {

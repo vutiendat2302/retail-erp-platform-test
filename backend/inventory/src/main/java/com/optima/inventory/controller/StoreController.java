@@ -30,4 +30,13 @@ public class StoreController {
         return storeService.getStores();
     }
 
+    @GetMapping("/getTotalProducts/{storeId}")
+    public int getTotalProducts(@PathVariable Long storeId) {
+        return storeService.getTotalProducts(storeId);
+    }
+
+    @GetMapping("/getTotalPrices/{storeId}")
+    public long getTotalPrices(@PathVariable Long storeId) {
+        return storeService.getTotalPrices(storeId);
+    }
 }
