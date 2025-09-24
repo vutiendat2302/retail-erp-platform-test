@@ -1,0 +1,4 @@
+package com.optima.inventory.controller;
+
+public class ExportProductLogController {
+}

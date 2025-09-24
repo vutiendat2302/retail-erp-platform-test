@@ -2,6 +2,11 @@
 This project uses **MySQL** as the database engine.
 
 ---
+- Cài thư viện: BeautifulSoup để crawl dữ liệu:
+- pip install requests beautifulsoup4
+
+
+
 ## 1. Database Overview
 ### Overview:
 The database support: 
