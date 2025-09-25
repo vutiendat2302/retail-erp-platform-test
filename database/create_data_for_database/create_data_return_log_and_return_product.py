@@ -36,8 +36,18 @@ for from_warehouse_id in warehouse_id:
     reason = fake.sentence(nb_words=20)
     to_supplier_id = random.choice(supplier_id)
     end_date = datetime.today() - timedelta(days=random.randint(200, 365), seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
-    return_date = fake.date_time_between(start_date="-2y", end_date=end_date)
-    return_date = return_date.strftime("%Y-%m-%d %H:%M:%S")
+    start_time = fake.date_time_between(start_date="-2y", end_date=end_date)
+    start_time = start_time.strftime("%Y-%m-%d %H:%M:%S")
+    start_time_dt = datetime.strptime(start_time, "%Y-%m-%d %H:%M:%S")
+
+    # end_time cách start_time 1-30 ngày ngẫu nhiên, giờ/phút/giây cũng ngẫu nhiên
+    random_days = random.randint(1, 30)
+    end_time = start_time_dt + timedelta(
+        days=random_days,
+        hours=random.randint(0, 23),
+        minutes=random.randint(0, 59),
+        seconds=random.randint(0, 59)
+    )
     status = 1
     create_by = random.choice(user_id)
     update_by = random.choice(user_id)
@@ -46,12 +56,12 @@ for from_warehouse_id in warehouse_id:
 
     sql = """
     INSERT INTO return_log
-    (id, from_warehouse_id, to_supplier_id, reason, return_date, total_refund, status,
+    (id, from_warehouse_id, to_supplier_id, reason, start_time, end_time, total_refund, status,
     create_by, create_at, update_by, update_at)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
     
-    cursor.execute(sql, (id, from_warehouse_id, to_supplier_id, reason, return_date, 0, status,
+    cursor.execute(sql, (id, from_warehouse_id, to_supplier_id, reason, start_time, end_time, 0, status,
                         create_by, create_at, update_by, update_at))
     
 connect_mysql.commit()
