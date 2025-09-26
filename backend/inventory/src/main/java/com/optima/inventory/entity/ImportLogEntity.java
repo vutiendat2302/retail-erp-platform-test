@@ -14,6 +14,7 @@ public class ImportLogEntity {
     @Id
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
+    private String name;
     private String description;
 
     @Column(name = "from_supplier_id")

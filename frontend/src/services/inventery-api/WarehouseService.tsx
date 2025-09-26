@@ -1,6 +1,6 @@
 import api from "./api";
-import type {WarehouseResponseDto} from "../../types/InventoryServiceType"
 
+type WarehouseResponseDto = any;
 type PageParams = {
   productName?: string | null;
   productBatch?: string | null;

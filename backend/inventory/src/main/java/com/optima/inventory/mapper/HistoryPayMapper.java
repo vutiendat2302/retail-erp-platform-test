@@ -8,6 +8,7 @@ import org.mapstruct.*;
 public interface HistoryPayMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "logId", ignore = true)
+    @Mapping(target = "type", ignore = true)
     HistoryPayEntity toHistoryPay(HistoryPayResponseDto historyResponseDto);
 
     HistoryPayResponseDto toHistoryPayDto(HistoryPayEntity historyPayEntity);

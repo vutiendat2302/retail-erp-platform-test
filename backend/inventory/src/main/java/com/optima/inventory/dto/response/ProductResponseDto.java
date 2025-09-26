@@ -35,13 +35,10 @@ public class ProductResponseDto {
     private Long updateBy;
     private String categoryName;
     private String brandName;
-    private String manufacturingLocationName;
     @JsonSerialize(using = ToStringSerializer.class)
     private Long categoryId;
     @JsonSerialize(using = ToStringSerializer.class)
     private Long brandId;
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long manufacturingLocationId;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
     private int expiration;

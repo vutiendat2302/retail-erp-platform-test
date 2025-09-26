@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../ui/card';
 import { TableBody, TableCell, TableHead, TableRow, TableHeader, Table } from '../../ui/table';
 import { Button } from '../../ui/button';
 import { Tooltip, TooltipTrigger} from '../../ui/tooltip';
 import { Eye, Trash, Pencil, Tag, Calendar } from 'lucide-react';
 import { DialogHeader, Dialog, DialogContent, DialogDescription, DialogTitle } from '../../ui/dialog';
 import { formatCurrency, formatDate } from '../Convert';
-import type { Product, ProductTable } from '../../../types/InventoryServiceType';
+import type { Product, TableProp } from '../../../types/InventoryServiceType';
+import { PageControl } from '../../../types/PageControl';
 
-export const ProductTableComponent: React.FC<ProductTable> = ({
+type ProductTableProp = TableProp<Product>
+export const ProductTableComponent: React.FC<ProductTableProp> = ({
   data,
   loading,
   onEdit,
   onDelete,
   totalElements,
+  goToPage,
+  totalPages,
+  page,
 }) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [openInformationProduct, setOpenInformationProduct] = useState<boolean>(false);
@@ -24,31 +29,8 @@ export const ProductTableComponent: React.FC<ProductTable> = ({
 
   return (
   <div className='w-full mx-auto items-center '>
-    <Card>
-      <CardHeader>
-        <div className='flex items-center justify-between'>
-          <div>
-            <CardTitle>
-              Danh Sách sản phẩm
-            </CardTitle>
-            <CardDescription className='mt-2'>
-              Hiển thị {data.length} trong tổng số {totalElements} sản phẩm
-            </CardDescription>
-          </div>
-          <div className="text-sm text-muted-foreground">
-            Cuộn để xem thêm • Click tiêu đề để sắp xếp
-          </div>
-        </div>
-
-      </CardHeader>
-      <CardContent>
         <div className="rounded-md border relative">
-          <div className='w-full h-[400px] overflow-auto scroll-smooth'
-            style = {{
-              scrollbarWidth: 'thin',
-              scrollbarColor: 'rgba(155,155,155,0.5) transparent'
-            }}
-          >
+          <div className='w-full  '>
             <Table className='relative'>
               <TableHeader className=" sticky top-0 z-50 !border-b border-gray-900 bg-gray-100 dark:bg-gray-900">
                 <TableRow className='hover:bg-transparent'>
@@ -147,8 +129,14 @@ export const ProductTableComponent: React.FC<ProductTable> = ({
             </Table>
         </div>
         </div>
-      </CardContent>
-    </Card>
+        <div className='justify-between centre mt-6'>
+          <PageControl
+          goToPage={goToPage}
+          currentPage={page}
+          totalPage={totalPages}
+        />
+        </div>
+        
 
     {selectedProduct && (
       <Dialog open = {openInformationProduct} onOpenChange={setOpenInformationProduct}>

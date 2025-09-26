@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -19,4 +20,6 @@ public class ProductBatchResponseDto {
     private long updateBy;
     private LocalDateTime updateAt;
     private LocalDateTime importDate;
+    private Long productId;
+    private LocalDateTime expiryDate;
 }

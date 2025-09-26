@@ -37,6 +37,7 @@ public class HistoryPayEntity {
     private LocalDateTime updateAt;
 
     private boolean status;
+    private String type;
 
     @PrePersist
     protected void onCreate() {

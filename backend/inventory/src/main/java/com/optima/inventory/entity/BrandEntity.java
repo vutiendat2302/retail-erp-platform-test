@@ -34,5 +34,9 @@ public class BrandEntity {
     private long updateBy;
 
     private boolean status;
+    private String image;
+
+    @Column(name = "cat_id")
+    private Long catId;
 }
 

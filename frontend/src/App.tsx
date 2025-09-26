@@ -6,11 +6,13 @@ import Attendance from './pages/Attendance';
 import Dashboard from './pages/Dashboard';
 import { useState, useEffect } from 'react';
 import { Report } from './components/inventory_components/Report';
-import Warehouse from './pages/Warehouse';
-import Product from './pages/Product';
+import Warehouse from './pages/inventory-page/Warehouse';
+import Product from './pages/inventory-page/Product';
 import { LoginForm } from './pages/Login';
 import POSPage from './pages/POSPage';
-import {Category} from './pages/Category';
+import {Category} from './pages/inventory-page/Category';
+import { Brand } from './pages/inventory-page/Brand';
+import { Supplier } from './pages/inventory-page/Supplier';
 import OrderManagementPage from './pages/OrderManagementPage';
 import PromoCodeManagementPage from './pages/PromoCodeManagementPage';
 import { Toaster } from 'sonner';
@@ -38,7 +40,7 @@ const AppRouter = () => {
   };
   
 
-   const goToPage = (page: PageType) => {
+  const goToPage = (page: PageType) => {
     switch (page) {
       case 'pos':
         navigate('/pos');
@@ -75,6 +77,8 @@ const AppRouter = () => {
         <Route path='product' element={<Product />} />
         <Route path='post-of-link' element={<POSPage/>} />
         <Route path = 'category' element={<Category />} />
+        <Route path = 'brand' element = {<Brand />} />
+        <Route path = 'supplier' element = {<Supplier />} />
         <Route path="pos" element={<POSPage />} />
         <Route path="orders" element={<OrderManagementPage onNavigate={goToPage} />} />
         <Route path="promocodes" element={<PromoCodeManagementPage onNavigate={goToPage} />} />

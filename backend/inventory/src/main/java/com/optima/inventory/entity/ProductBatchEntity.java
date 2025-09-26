@@ -3,6 +3,7 @@ package com.optima.inventory.entity;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Cleanup;
 import lombok.Data;
 
@@ -33,6 +34,14 @@ public class ProductBatchEntity {
 
     @Column(name = "import_date")
     private LocalDateTime importDate;
+
+    private Boolean status;
+
+    @Column(name = "product_id")
+    private Long productId;
+
+    @Column(name = "expiry_date")
+    private LocalDateTime expiryDate;
 
     @PrePersist
     protected void onCreate() {

@@ -52,3 +52,4 @@ export interface SearchResult {
   category_id: number;
   sales: number;
 }
+

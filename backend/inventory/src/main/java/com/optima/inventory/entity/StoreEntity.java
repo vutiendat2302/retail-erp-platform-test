@@ -36,6 +36,12 @@ public class StoreEntity {
 
     private boolean status;
 
+    @Column(name = "province_code")
+    private String provinceCode;
+
+    @Column(name = "province_name")
+    private String provinceName;
+
     @PrePersist
     protected void onCreate() {
         this.createAt = LocalDateTime.now();

@@ -3,8 +3,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../..
 import { Button } from '../../ui/button';
 import { Input } from '../../ui/input';
 import { Search, Check } from 'lucide-react';
-import { Select } from '../../ui/select';
-import { SelectContent,SelectItem, SelectLabel, SelectTrigger} from '../../ui/select';
 import type {ProductBatch} from '../../../types/InventoryServiceType';
 import { Popover } from '../../ui/popover';
 import { PopoverContent, PopoverTrigger } from '../../ui/popover';
@@ -38,7 +36,7 @@ export const InventorySearch: React.FC<InventorySearchData> = ({
   console.log(productName, productBatch);
 
   return (
-      <div className="p-6 mx-auto">
+      <div className="p-6 mx-auto w-full">
         {/* Search and Filter */}
         <Card>
           <CardContent>

@@ -42,7 +42,7 @@ public class ProductBatchController {
     }
 
     @DeleteMapping("/{productBatchId}")
-    public String deleteProductBatch(@PathVariable("productBatchId") long productBatchId) {
+    public String deleteProductBatch(@PathVariable("productBatchId") Long productBatchId) {
         productBatchService.deleteProductBatch(productBatchId);
         return "Product Batch has been deleted";
     }

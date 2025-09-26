@@ -14,10 +14,13 @@ import com.optima.inventory.utils.SnowflakeIdGenerator;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +29,8 @@ public class ProductService {
     private ProductRepository productRepository;
     @Autowired
     private ProductMapper productMapper;
+
+    private final Random random = new Random();
 
     public ProductService(ProductRepository productRepository,
                           ProductMapper productMapper) {
@@ -90,5 +95,20 @@ public class ProductService {
     @Transactional
     public Page<ProductResponseDto> getSearchAllIn4(String search, Long category, Long brand, Boolean status, Pageable pageable) {
         return productRepository.getSearchAllIn4(search, category, brand, status, pageable).map(productMapper::fromProjection);
+    }
+
+    public Optional<ProductResponseDto> findRandProduct() {
+        long count = productRepository.count();
+        if (count == 0) {
+            return Optional.empty();
+        }
+
+        int randomIndex = random.nextInt((int) count);
+        Page<ProductEntity> productPage = productRepository.findAll(PageRequest.of(randomIndex, 1));
+        if (productPage.hasContent()) {
+            ProductEntity randomProduct = productPage.getContent().get(0);
+            return Optional.of(productMapper.toProductResponseDto(randomProduct));
+        }
+        return Optional.empty();
     }
 }

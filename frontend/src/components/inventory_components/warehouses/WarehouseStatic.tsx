@@ -20,7 +20,7 @@ const WarehouseStatic: React.FC<WarehouseStaticData> = ({
   countProductsNearOut
 }) =>  {
   return (
-    <div className="p-6 w-[98%] mx-auto">
+    <div className="p-6 mx-auto">
       {/* Stats Cards */}
       <div className="grid md:grid-cols-1 lg:grid-cols-5 gap-4">
         <Card>

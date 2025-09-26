@@ -34,4 +34,9 @@ public class WarehouseController {
     public WarehouseEntity getWarehouse(@PathVariable Long warehouseId) {
         return warehouseService.getWarehouse(warehouseId);
     }
+
+    @GetMapping("/warehouses")
+    public List<WarehouseResponseDto> getAllWarehouses() {
+        return warehouseService.getWarehouses();
+    }
 }

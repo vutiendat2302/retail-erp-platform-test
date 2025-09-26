@@ -37,4 +37,7 @@ public class SupplierEntity {
 
     private Boolean status;
     private String phone;
+    private String web;
+    private String type;
+    private String area;
 }

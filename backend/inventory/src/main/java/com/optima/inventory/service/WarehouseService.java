@@ -1,15 +1,21 @@
 package com.optima.inventory.service;
 
+import com.optima.inventory.dto.response.ProductResponseDto;
 import com.optima.inventory.dto.response.WarehouseResponseDto;
+import com.optima.inventory.entity.ProductEntity;
 import com.optima.inventory.entity.WarehouseEntity;
 import com.optima.inventory.mapper.WarehouseMapper;
 import com.optima.inventory.repository.WarehouseRepository;
 import com.optima.inventory.utils.SnowflakeIdGenerator;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,6 +24,8 @@ public class WarehouseService {
     private WarehouseRepository warehouseRepository;
     @Autowired
     private WarehouseMapper warehouseMapper;
+
+    private final Random random = new Random();
 
     @Transactional
     public WarehouseResponseDto createWarehouse(WarehouseResponseDto warehouseResponseDto) {
@@ -56,5 +64,20 @@ public class WarehouseService {
     @Transactional
     public void deleteWarehouse(long warehouseId) {
         warehouseRepository.deleteById(warehouseId);
+    }
+
+    public Optional<WarehouseResponseDto> findRandWarehouse() {
+        long count = warehouseRepository.count();
+        if (count == 0) {
+            return Optional.empty();
+        }
+
+        int randomIndex = random.nextInt((int) count);
+        Page<WarehouseEntity> warehouse = warehouseRepository.findAll(PageRequest.of(randomIndex, 1));
+        if (warehouse.hasContent()) {
+            WarehouseEntity warehouseEntity = warehouse.getContent().get(0);
+            return Optional.of(warehouseMapper.toWarehouseResponseDto(warehouseEntity));
+        }
+        return Optional.empty();
     }
 }

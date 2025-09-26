@@ -72,9 +72,6 @@ public class ProductEntity {
     @Column(name = "brand_id")
     private Long brandId;
 
-    @Column(name = "manufacturing_location_id")
-    private Long manufacturingLocationId;
-
     @PrePersist
     protected void onCreate() {
         this.createAt = LocalDateTime.now();

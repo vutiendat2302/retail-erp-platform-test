@@ -59,4 +59,9 @@ public class SupplierController {
         }
         return ResponseEntity.ok(supplierService.getSearchAllIn4(search, statusBool, pageable));
     }
+
+    @GetMapping("/suppliers")
+    public List<SupplierResponseDto> getAllSuppliers() {
+        return supplierService.getAllSuppliers();
+    }
 }

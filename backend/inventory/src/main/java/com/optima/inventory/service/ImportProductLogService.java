@@ -7,12 +7,17 @@ import com.optima.inventory.repository.*;
 import com.optima.inventory.utils.SnowflakeIdGenerator;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class ImportProductLogService {
@@ -36,6 +41,9 @@ public class ImportProductLogService {
     private HistoryPayRepository historyPayRepository;
     @Autowired
     private HistoryPayMapper historyPayMapper;
+
+    private ProductService productService;
+
 
 
     public List<ImportProductResponseDto> getImportProduct(Long logId) {
@@ -64,17 +72,20 @@ public class ImportProductLogService {
         importLogEntity.setUpdateAt(LocalDateTime.now());
         importLogRepository.save(importLogEntity);
 
-        // them import product
-        List<ImportProductEntity> importProductEntities = importProductLog.getImportProductResponseDtoList().stream()
-                .map(dto -> {
-                    ImportProductEntity importProductEntity = importProductMapper.toImportProduct(dto);
-                    importProductEntity.setId(SnowflakeIdGenerator.nextId());
-                    importProductEntity.setLogId(newImportLogId);
-                    return importProductEntity;
-                })
-                .toList();
+
+        List<ImportProductEntity> importProductEntities = new ArrayList<>();
+        long totalPrice = 0;
+
+        for (var dto : importProductLog.getImportProductResponseDtoList()) {
+            ImportProductEntity entity = importProductMapper.toImportProduct(dto);
+            entity.setId(SnowflakeIdGenerator.nextId());
+            entity.setLogId(newImportLogId);
+            totalPrice += entity.getPrice() * entity.getQuantity();
+            importProductEntities.add(entity);
+        }
 
         importProductRepository.saveAll(importProductEntities);
+        importLogEntity.setTotalAmount(totalPrice);
 
         return importLogMapper.toImportLogDto(importLogRepository.save(importLogEntity));
     }
@@ -135,6 +146,7 @@ public class ImportProductLogService {
         HistoryPayEntity historyPayEntity = historyPayMapper.toHistoryPay(historyPayResponseDto);
         historyPayEntity.setId(SnowflakeIdGenerator.nextId());
         historyPayEntity.setLogId(logId);
+        historyPayEntity.setType("IN");
         return historyPayMapper.toHistoryPayDto(historyPayRepository.save(historyPayEntity));
     }
 
@@ -148,5 +160,30 @@ public class ImportProductLogService {
         updateInventory(importLogId);
         return importLogMapper.toImportLogDto(importLogRepository.save(importLogEntity));
     }
+
+    public ImportProductResponseDto createImportProduct(ImportProductResponseDto importProductResponseDto) {
+        ImportProductEntity importProductEntity = importProductMapper.toImportProduct(importProductResponseDto);
+
+        importProductEntity.setId(SnowflakeIdGenerator.nextId());
+        return importProductMapper.toImportProductDto(importProductRepository.save(importProductEntity));
+    }
+
+    public List<ImportLogResponseDto> getAllImportLogs() {
+        return importLogRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
+                .stream()
+                .map(importLogMapper::toImportLogDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public Page<ImportLogResponseDto> getSearchAllIn4(String search, Boolean status, Pageable pageable) {
+        return importLogRepository.getSearchAllIn4(search,status, pageable).map(importLogMapper::fromProjection);
+    }
+
+    @Transactional
+    public void deleteImport(Long importId) {
+        importLogRepository.deleteById(importId);
+    }
+
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '../../ui/card';
 import { TableBody, TableCell, TableHead, TableRow, TableHeader, Table } from '../../ui/table';
 import { Button } from '../../ui/button';
 import { Tooltip, TooltipTrigger} from '../../ui/tooltip';
@@ -7,6 +7,7 @@ import { Eye, Trash, Pencil, Tag, Calendar } from 'lucide-react';
 import { DialogHeader, Dialog, DialogContent, DialogDescription, DialogTitle } from '../../ui/dialog';
 import { formatCurrency, formatDate } from '../Convert';
 import type { Category, CategoryTableProp } from '../../../types/InventoryServiceType';
+import { PageControl } from '../../../types/PageControl';
 
 export const CategoryTable: React.FC<CategoryTableProp> = ({
   data,
@@ -14,6 +15,9 @@ export const CategoryTable: React.FC<CategoryTableProp> = ({
   onEdit,
   onDelete,
   totalElements,
+  goToPage,
+  totalPages,
+  page
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [openInformationCategory, setOpenInformationCategory] = useState<boolean>(false);
@@ -24,129 +28,112 @@ export const CategoryTable: React.FC<CategoryTableProp> = ({
 
   return (
   <div className='w-full mx-auto items-center '>
-    <Card>
-      <CardHeader>
-        <div className='flex items-center justify-between'>
-          <div>
-            <CardTitle>
-              Danh sách danh mục sản phẩm
-            </CardTitle>
-            <CardDescription className='mt-2'>
-              Hiển thị {data.length} trong tổng số {totalElements} danh mục
-            </CardDescription>
-          </div>
-          <div className="text-sm text-muted-foreground">
-            Cuộn để xem thêm • Click tiêu đề để sắp xếp
-          </div>
-        </div>
+      <div className="rounded-md border relative">
+        <div className='w-full'>
+          <Table className='relative'>
+            <TableHeader className=" sticky top-0 z-50 !border-b border-gray-900 bg-gray-100 dark:bg-gray-900">
+              <TableRow className='hover:bg-transparent'>
+                <TableHead className='text-center !border-r !border-gray-300'>
+                  Tên danh mục
+                </TableHead>
 
-      </CardHeader>
-      <CardContent>
-        <div className="rounded-md border relative">
-          <div className='w-full h-[400px] overflow-auto scroll-smooth'
-            style = {{
-              scrollbarWidth: 'thin',
-              scrollbarColor: 'rgba(155,155,155,0.5) transparent'
-            }}
-          >
-            <Table className='relative'>
-              <TableHeader className=" sticky top-0 z-50 !border-b border-gray-900 bg-gray-100 dark:bg-gray-900">
-                <TableRow className='hover:bg-transparent'>
-                  <TableHead className='text-center !border-r !border-gray-300'>
-                    Tên danh mục
-                  </TableHead>
-                  <TableHead className='text-center !border-r !border-gray-300'>Tiêu đề</TableHead>
-                  <TableHead className='text-center !border-r !border-gray-300'>Mô tả</TableHead>
-                  <TableHead className='text-center !border-r !border-gray-300'>Số sản phẩm</TableHead>
-                  <TableHead className='text-center !border-r !border-gray-300'>Trạng thái</TableHead>
-                  <TableHead className='text-center '>Chức năng</TableHead>
+                <TableHead className='text-center !border-r !border-gray-300'>Mô tả</TableHead>
+                <TableHead className='text-center !border-r !border-gray-300'>Số sản phẩm</TableHead>
+                <TableHead className='text-center !border-r !border-gray-300'>Trạng thái</TableHead>
+                <TableHead className='text-center '>Chức năng</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {loading ? (
+                <TableRow>
+                  <TableCell colSpan={5} className='px-4 py-6 text-center'>
+                    Đang tải dữ liệu
+                  </TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {loading ? (
-                  <TableRow>
-                    <TableCell colSpan={5} className='px-4 py-6 text-center'>
-                      Đang tải dữ liệu
+              ): data.length>0 ? (
+                data.map((cat) => (
+                  <TableRow key = {cat.id} className="!border-b">
+                    <TableCell className='!border-r !border-gray-300'>
+                      <div>
+                        <div className='font-medium'>{cat.name}</div>
+                        <p>{cat.metaKeyword}</p>
+                      </div>
+                    </TableCell>
+                    <TableCell className='text-left !border-r !border-gray-300'>{cat.description}</TableCell>
+                    <TableCell className='text-left !border-r !border-gray-300'>Đang phát triển</TableCell>
+                    <TableCell className='text-center !border-r !border-gray-300 '>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        cat.status === 'active' ? 'bg-green-100 text-green-700'
+                        :'bg-red-100 text-red-700'
+                      }`}
+                      >
+                        {cat.status}
+                      </span>
+                    </TableCell>
+                    <TableCell className='text-center'>
+                      <div className='flex gap-2 items-center justify-center'>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              onClick={() => {handleViewCategory(cat)}}
+                              className='!rounded-md text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white transition-colors'
+                            >
+                              <Eye className="w-4 h-4" />
+                            </Button>
+                          </TooltipTrigger>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              onClick={() => onEdit(cat)}
+                              className='!rounded-md text-green-500 border-green-500 hover:bg-green-500 hover:text-white transition-colors'
+                            >
+                              <Pencil className="w-4 h-4" />
+                            </Button>
+                          </TooltipTrigger>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              onClick={() => onDelete(cat.id)}
+                              className='!rounded-md text-red-500 border-red-500 hover:bg-red-500 hover:text-white transition-colors'
+                            >
+                              <Trash className="w-4 h-4" />
+                            </Button>
+                          </TooltipTrigger>
+                        </Tooltip>
+                      </div>
                     </TableCell>
                   </TableRow>
-                ): data.length>0 ? (
-                  data.map((cat) => (
-                    <TableRow key = {cat.id} className="!border-b">
-                      <TableCell className='!border-r !border-gray-300'>
-                        <div>
-                          <div className='font-medium'>{cat.name}</div>
-                          <p>{cat.metaKeyword}</p>
-                        </div>
-                      </TableCell>
-                      <TableCell className='text-center !border-r !border-gray-300'>{cat.seoTitle} </TableCell>
-                      <TableCell className='text-left !border-r !border-gray-300'>{cat.description}</TableCell>
-                      <TableCell className='text-left !border-r !border-gray-300'>Đang phát triển</TableCell>
-                      <TableCell className='text-center !border-r !border-gray-300 '>
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          cat.status === 'active' ? 'bg-green-100 text-green-700'
-                          :'bg-red-100 text-red-700'
-                        }`}
-                        >
-                          {cat.status}
-                        </span>
-                      </TableCell>
-                      <TableCell className='text-center'>
-                        <div className='flex gap-2 items-center justify-center'>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                variant="outline"
-                                size="icon"
-                                onClick={() => {handleViewCategory(cat)}}
-                                className='!rounded-md text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white transition-colors'
-                              >
-                                <Eye className="w-4 h-4" />
-                              </Button>
-                            </TooltipTrigger>
-                          </Tooltip>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={5} className='px-4 py-6 text-center'>
+                    Không có dữ liệu
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+      </div>
+      </div>
 
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                variant="outline"
-                                size="icon"
-                                onClick={() => onEdit(cat)}
-                                className='!rounded-md text-green-500 border-green-500 hover:bg-green-500 hover:text-white transition-colors'
-                              >
-                                <Pencil className="w-4 h-4" />
-                              </Button>
-                            </TooltipTrigger>
-                          </Tooltip>
-
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                variant="outline"
-                                size="icon"
-                                onClick={() => onDelete(cat.id)}
-                                className='!rounded-md text-red-500 border-red-500 hover:bg-red-500 hover:text-white transition-colors'
-                              >
-                                <Trash className="w-4 h-4" />
-                              </Button>
-                            </TooltipTrigger>
-                          </Tooltip>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={5} className='px-4 py-6 text-center'>
-                      Không có dữ liệu
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-        </div>
-        </div>
-      </CardContent>
-    </Card>
+    <div className='"justify-between center mt-6'>
+        <PageControl
+          goToPage={goToPage}
+          currentPage={page}
+          totalPage={totalPages}
+        />
+    </div>
+        
 
     {selectedCategory && (
       <Dialog open = {openInformationCategory} onOpenChange={setOpenInformationCategory}>

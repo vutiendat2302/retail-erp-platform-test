@@ -33,16 +33,16 @@ export function WarehouseChoose({
     <div className='flex items-center justify-between gap-[12px]'>
       <Button variant="outline"
         className='!bg-gray-900 text-white hover:bg-gray-700 border p-2 !rounded-md'>
-        <Label className=' font-bold'>Warehouse:</Label>
+        <Label className=' font-bold'>Tên kho hàng:</Label>
       </Button>
 
       <Popover open={openFindWarehouse} onOpenChange={setOpenWarehouse}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
-            className="!w-[250px] p-2 !rounded-md text-left"
+            className="w-[250px] p-2 !rounded-md text-left flex items-center justify-between"
           >
-          <span className='grow text-center'>
+          <span className='grow text-center truncate'>
           {selectWarehouse
           ? dataWarehouse.find((warehouse) => warehouse.id === selectWarehouse)?.name
           : "Chọn kho hàng"}

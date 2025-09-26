@@ -33,6 +33,9 @@ public class WarehouseEntity {
     @Column(name = "update_at")
     private LocalDateTime updateAt;
 
+    private String phone;
+    private String image;
+
     @PrePersist
     protected void onCreate() {
         this.createAt = LocalDateTime.now();

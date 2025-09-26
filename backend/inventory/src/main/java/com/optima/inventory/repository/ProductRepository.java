@@ -24,10 +24,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
         int getPriceNormal();
         String getBrandName();
         String getCategoryName();
-        String getManufacturingLocationName();
         Long getBrandId();
         Long getCategoryId();
-        Long getManufacturingLocationId();
         String getSeoTitle();
         String getTag();
         int getPriceSell();
@@ -61,15 +59,12 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
         a.updateAt as updateAt,
         b.name as brandName,
         c.name as categoryName,
-        d.name as manufacturingLocationName,
         b.id as brandId,
         c.id as categoryId,
-        d.id as manufacturingLocationId,
         a.sku as sku
     from ProductEntity a
     left join BrandEntity b on a.brandId = b.id
     left join CategoryEntity c on a.categoryId = c.id
-    left join ManufacturingLocationEntity d on a.manufacturingLocationId = d.id
     """)
     List<ProductView> findAllWithBrandCategoryManufacturing();
 
@@ -93,15 +88,12 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
         a.updateAt as updateAt,
         b.name as brandName,
         c.name as categoryName,
-        d.name as manufacturingLocationName,
         b.id as brandId,
-        d.id as manufacturingLocationId,
         c.id as categoryId,
         a.sku as sku
     from ProductEntity a
     left join BrandEntity b on a.brandId = b.id
     left join CategoryEntity c on a.categoryId = c.id
-    left join ManufacturingLocationEntity d on a.manufacturingLocationId = d.id
     """)
     Page<ProductView> findAllIn4(Pageable pageable);
 
@@ -133,15 +125,12 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
         a.updateAt as updateAt,
         b.name as brandName,
         c.name as categoryName,
-        d.name as manufacturingLocationName,
         b.id as brandId,
-        d.id as manufacturingLocationId,
         c.id as categoryId,
         a.sku as sku
     from ProductEntity a
     join BrandEntity b on a.brandId = b.id
     join CategoryEntity c on a.categoryId = c.id
-    join ManufacturingLocationEntity d on a.manufacturingLocationId = d.id
     where
         (
             :search IS NULL

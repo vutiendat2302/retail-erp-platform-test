@@ -19,6 +19,8 @@ public interface InventoryRepository extends JpaRepository<InventoryEntity, Long
 
     Optional<InventoryEntity> findByWarehouseIdAndProductIdAndProductBatchId(Long warehouseId, Long productId, Long productBatchId);
 
+    int findInventoryByProductId(Long productId);
+
     public interface InventoryView {
         Long getId();
         int getQuantityAvailable();
@@ -136,13 +138,11 @@ public interface InventoryRepository extends JpaRepository<InventoryEntity, Long
         c.name as productName,
         d.name as warehouseName,
         b.importDate as importDate,
-        c.priceNormal as priceNormal,
-        e.name as manufacturingLocation
+        c.priceNormal as priceNormal
     from InventoryEntity a
     join ProductBatchEntity b on a.productBatchId = b.id
     join ProductEntity c on a.productId = c.id
     join WarehouseEntity d on a.warehouseId = d.id
-    join ManufacturingLocationEntity  e on e.id = c.manufacturingLocationId
     where
         (
         d.id = :warehouseId
@@ -159,4 +159,11 @@ public interface InventoryRepository extends JpaRepository<InventoryEntity, Long
             @Param("productBatch") Long productBatch,
             Pageable pageable
     );
+
+    @Query("""
+    select sum(a.quantityAvailable)
+    from InventoryEntity a
+    where a.warehouseId = :warehouseId and a.productId = :productId
+    """)
+    long getSumQuantityByProductIdAndWarehouseId(@Param("warehouseId") Long warehouseId, @Param("productId") Long productId);
 }
