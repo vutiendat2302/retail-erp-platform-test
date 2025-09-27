@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import PieChart from '../components/charts/PieChart';
-import JoinDateBarChart from '../components/charts/JoinDateBarChart';
-import BranchEmployeeBarChart from '../components/charts/BranchEmployeeBarChart';
+import PieChart from '../components/employee/PieChart';
+import JoinDateBarChart from '../components/employee/JoinDateBarChart';
+import BranchEmployeeBarChart from '../components/employee/BranchEmployeeBarChart';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
@@ -42,7 +42,7 @@ import {
   Activity
 } from 'lucide-react';
 import { getStores } from '../services/inventery-api/StoreServices';
-import { StoreChoose } from '../components/inventory_components/stores/StoreChoose';
+import { StoreChoose } from '../components/inventory/stores/StoreChoose';
 
 interface Store {
   id: string;

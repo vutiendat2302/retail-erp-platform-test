@@ -4,7 +4,7 @@ import { createBrand, deleteBrand, getSearchBrand, updateBrand } from "../../ser
 import { DialogContent, DialogDescription, DialogTitle, DialogTrigger, Dialog, DialogHeader } from '../../components/ui/dialog';
 import { Button } from '../../components/ui/button';
 import { Plus, } from 'lucide-react';
-import { BrandTable } from "../../components/inventory_components/brands/BrandTable";
+import { BrandTable } from "../../components/inventory/brands/BrandTable";
 
 export function Brand() {
   const [brands, setBrands] = useState<BrandType[]>([])

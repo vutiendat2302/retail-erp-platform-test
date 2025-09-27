@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import ProductForm from '../../components/inventory_components/products/ProductForm';
+import ProductForm from '../../components/inventory/products/ProductForm';
 
 import {
   createProduct,
@@ -15,9 +15,9 @@ import {
 import { DialogContent, DialogDescription, DialogTitle, DialogTrigger, Dialog, DialogHeader } from '../../components/ui/dialog';
 import { Button } from '../../components/ui/button';
 import { Plus, Search, Package, AlertTriangle, TrendingUp, DollarSign, University } from 'lucide-react';
-import ProductStatic from '../../components/inventory_components/products/ProductStatic';
-import { ProductSearch } from '../../components/inventory_components/products/ProductSearch';
-import { ProductTableComponent } from '../../components/inventory_components/products/ProductTableComponent';
+import ProductStatic from '../../components/inventory/products/ProductStatic';
+import { ProductSearch } from '../../components/inventory/products/ProductSearch';
+import { ProductTableComponent } from '../../components/inventory/products/ProductTableComponent';
 import type { Product as ProductType, ProductFormData, CategoryName, ManufacturingLocationName, BrandName } from '../../types/InventoryServiceType';
 
 const Product: React.FC = () => {

@@ -5,7 +5,7 @@ import Schedule from './pages/Schedule';
 import Attendance from './pages/Attendance';
 import Dashboard from './pages/Dashboard';
 import { useState, useEffect } from 'react';
-import { Report } from './components/inventory_components/Report';
+import { Report } from './components/inventory/Report';
 import Warehouse from './pages/inventory-page/Warehouse';
 import Product from './pages/inventory-page/Product';
 import { LoginForm } from './pages/Login';

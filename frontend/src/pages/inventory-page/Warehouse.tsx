@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import { ProductSearch } from '../../components/inventory_components/products/ProductSearch';
-import { WarehouseChoose } from '../../components/inventory_components/warehouses/WarehouseChoose';
+import { ProductSearch } from '../../components/inventory/products/ProductSearch';
+import { WarehouseChoose } from '../../components/inventory/warehouses/WarehouseChoose';
 import { getCountProductInWarehouse, getCountProductsNearExpiry, getCountProductsNearOut, getProductBatch, getSumQuantityProductInWarehouse, getWarehouses } from '../../services/inventery-api/WarehouseService';
-import { WarehouseTableComponent } from '../../components/inventory_components/warehouses/WarehouseTable';
+import { WarehouseTableComponent } from '../../components/inventory/warehouses/WarehouseTable';
 import { getInventoryByNameWarehouse, getTotalPriceNormalByWarehouse, getSearchInventory} from '../../services/inventery-api/WarehouseService';
-import WarehouseStatic from '../../components/inventory_components/warehouses/WarehouseStatic';
+import WarehouseStatic from '../../components/inventory/warehouses/WarehouseStatic';
 import type { Warehouse as WarehouseType, Inventory, ProductBatch } from '../../types/InventoryServiceType';
 import { HardDrive } from 'lucide-react';
-import { InventorySearch } from '../../components/inventory_components/warehouses/WarehouseSearch';
+import { InventorySearch } from '../../components/inventory/warehouses/WarehouseSearch';
 
 const Warehouse: React.FC = () => {
   //data

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Label } from '../../ui/label';
-import { Textarea } from '../../../components/ui/textarea';
+import { Textarea } from '../../ui/textarea';
 import { Button } from '../../ui/button';
 import { getBrandName, getCategoryName, getManufacturingName } from '../../../services/inventery-api/ProductService';
 import type { ProductFormData, ProductFormProps, CategoryName, BrandName, ManufacturingLocationName } from '../../../types/InventoryServiceType';

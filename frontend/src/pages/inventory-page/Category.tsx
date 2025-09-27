@@ -4,9 +4,9 @@ import { Button } from '../../components/ui/button';
 import { Plus, } from 'lucide-react';
 import { createCategory, updateCategory, deleteCategory, getCountCategoryActive, getSearchCategory } from '../../services/inventery-api/CategoryService';
 import type { Category, CategoryFormData, CategoryFormProps, CategoryTableProp} from '../../types/InventoryServiceType';
-import {CategoryTable } from '../../components/inventory_components/categories/CategoryTable';
-import CategoryForm from '../../components/inventory_components/categories/CategoryForm'
-import CategoryStatic from '../../components/inventory_components/categories/CategoryStatic';
+import {CategoryTable } from '../../components/inventory/categories/CategoryTable';
+import CategoryForm from '../../components/inventory/categories/CategoryForm'
+import CategoryStatic from '../../components/inventory/categories/CategoryStatic';
 import { getCountProductActive } from '../../services/inventery-api/ProductService';
 
 export function Category() {

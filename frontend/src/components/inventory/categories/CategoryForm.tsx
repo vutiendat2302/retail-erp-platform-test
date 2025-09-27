@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Label } from '../../ui/label';
-import { Textarea } from '../../../components/ui/textarea';
+import { Textarea } from '../../ui/textarea';
 import { Button } from '../../ui/button';
 import type {CategoryFormData, Category, CategoryFormProps } from '../../../types/InventoryServiceType';
 
