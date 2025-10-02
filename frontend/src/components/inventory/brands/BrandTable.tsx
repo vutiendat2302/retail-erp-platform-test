@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import type {Brand, TableProp } from "../../../types/InventoryServiceType";
+import type {Brand, TableProp } from "@/types/InventoryServiceType";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../ui/card';
 import { TableBody, TableCell, TableHead, TableRow, TableHeader, Table } from '../../ui/table';
 import { Button } from '../../ui/button';

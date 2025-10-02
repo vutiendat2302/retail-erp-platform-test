@@ -2,8 +2,8 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import MainLayout from './components/layouts/MainLayout';
 import Employee from './pages/Employee';
 import Schedule from './pages/Schedule';
-import Attendance from './pages/Attendance';
-import Dashboard from './pages/Dashboard';
+import Attendance from 'p/Attendance';
+import Dashboard from 'p/Dashboard';
 import { useState, useEffect } from 'react';
 import { Report } from './components/inventory/Report';
 import Warehouse from './pages/inventory-page/Warehouse';
@@ -40,20 +40,6 @@ const AppRouter = () => {
   };
   
 
-  const goToPage = (page: PageType) => {
-    switch (page) {
-      case 'pos':
-        navigate('/pos');
-        break;
-      case 'orders':
-        navigate('/orders');
-        break;
-      case 'promocodes':
-        navigate('/promocodes');
-        break;
-    }
-  };
-
   useEffect(() => {
     if (!userData && window.location.pathname !== '/login') {
       navigate('/login');
@@ -79,16 +65,12 @@ const AppRouter = () => {
         <Route path = 'category' element={<Category />} />
         <Route path = 'brand' element = {<Brand />} />
         <Route path = 'supplier' element = {<Supplier />} />
-        <Route path="pos" element={<POSPage />} />
-        <Route path="orders" element={<OrderManagementPage onNavigate={goToPage} />} />
-        <Route path="promocodes" element={<PromoCodeManagementPage onNavigate={goToPage} />} />
       </Route>
     </Routes>
   );
 };
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<PageType>('pos');
   return (
     <BrowserRouter>
       <AppRouter />

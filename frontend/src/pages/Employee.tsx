@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import EmployeeTable from '../components/common/EmployeeTable';
-import EmployeeForm from '../components/common/EmployeeForm';
+import EmployeeTable from '../components/employee/common/EmployeeTable';
+import EmployeeForm from '../components/employee/common/EmployeeForm';
 import {
   getPagedEmployees,
   createEmployee,

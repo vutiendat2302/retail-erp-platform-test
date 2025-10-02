@@ -33,7 +33,7 @@ export function StoreChoose({
     <div className='flex items-center justify-between gap-[12px]'>
       <Button variant="outline"
         className='!bg-gray-900 text-white hover:bg-gray-700 border p-2 rounded'>
-        <Label className='font-bold'>Cửa hàng:</Label>
+        <span className='font-inter font-weight-semibold text-center'>Cửa hàng:</span>
       </Button>
 
       <Popover open={openFindStore} onOpenChange={setOpenFindStore}>
@@ -44,7 +44,7 @@ export function StoreChoose({
             aria-expanded={openFindStore}
             className="w-70 p-2 rounded text-left justify-between"
           >
-            <span className='grow text-center truncate'>
+            <span className = 'font-inter font-weight-semibold grow text-center truncate'>
               {selectStore
                 ? dataStore.find((s) => s.id === selectStore)?.name
                 : "Chọn cửa hàng"}

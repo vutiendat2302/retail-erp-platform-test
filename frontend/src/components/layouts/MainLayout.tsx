@@ -27,7 +27,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ userData, onLogout }) => {
 
         <Navbar />
         <main className="flex justify-center p-4 mt-16 ">
-          <div className='w-full max-w-[1400px] bg-white min-h-[calc(100vh-64px)] shadow-md p-6'>
+          <div className='w-full max-w-[1400px] min-h-[calc(100vh-64px)] shadow p-6'>
             <Outlet />
           </div>
         </main>
