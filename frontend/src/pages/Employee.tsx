@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import EmployeeTable from '../components/employee/common/EmployeeTable';
+import {EmployeeTable} from '@/components/employee/common/EmployeeTable';
 import EmployeeForm from '../components/employee/common/EmployeeForm';
 import {
   getPagedEmployees,
@@ -96,7 +96,7 @@ const Employee: React.FC = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-4">Quản Lý Nhân Viên</h1>
+      <h3 className="mb-2 title">Quản Lý Nhân Viên</h3>
 
       <EmployeeTable
         data={employees}

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '../../ui/card';
 import { Table, TableBody, TableCell, TableHead, TableRow, TableHeader } from '../../ui/table';
 import { ScrollArea } from '../../ui/scroll-area';
-import { formatCurrency, formatDate, formatNumber } from '../Convert';
+import { formatCurrency, formatDate, formatNumber } from '../../ui/Convert';
 import type { Inventory, InventoryTable } from '../../../types/InventoryServiceType';
 import { Tooltip, TooltipTrigger} from '../../ui/tooltip';
 import { Button } from '../../ui/button';

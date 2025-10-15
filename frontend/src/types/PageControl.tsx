@@ -83,7 +83,7 @@ export const PageControl: React.FC<PageControlProp> = ({
           variant="outline"
           className="size-8 w-50 px-3 py-1 rounded"
         >
-        <span className="font-medium">
+        <span className="font-weight-semibold font-inter font-size-sm">
           <strong>{totalPage === 0 ? 0 : currentPage + 1}</strong> / <strong>{totalPage}</strong>
         </span>
         </Button>
@@ -131,7 +131,7 @@ export const PageControl: React.FC<PageControlProp> = ({
               }
             }}
           />
-          <Button type = "submit" size = "sm" className="h-8 size-8 w-11 bg-black rounded">
+          <Button type = "submit" size = "sm" className="h-8 size-8 w-11 bg-black text-white rounded text-sm font-weight-semibold items-center">
             Đi
           </Button>
         </form>

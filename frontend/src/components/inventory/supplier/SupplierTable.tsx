@@ -6,7 +6,7 @@ import { Button } from '../../ui/button';
 import { Tooltip, TooltipTrigger} from '../../ui/tooltip';
 import { Eye, Trash, Pencil, Tag, Calendar, Mail, Phone, Space, ArrowLeft, ArrowRight } from 'lucide-react';
 import { DialogHeader, Dialog, DialogContent, DialogDescription, DialogTitle } from '../../ui/dialog';
-import { formatCurrency, formatDate } from '../Convert';
+import { formatCurrency, formatDate } from '../../ui/Convert';
 import { PageControl } from '../../../types/PageControl';
 
 export const SupplierTable: React.FC<SupplierTableProp> = ({

@@ -1,47 +1,131 @@
-// file: components/inventory/ImportForm.tsx
-import React, { useState, useEffect } from 'react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { getSuppliers, getWarehouses, getProducts, createImportLog, updateImportLog } from "@/services/api";
-import { Trash2 } from 'lucide-react';
-import { toast } from 'sonner';
+import React, { useState, useEffect} from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
+import { Label } from '../../ui/label';
+import { Textarea } from '../../ui/textarea';
+import { Button } from '../../ui/button';
+import type { ImportLogFormData , ImportLogFormProps } from '../../../types/InventoryServiceType';
+import { number } from 'framer-motion';
 
-// ... (Các interface Supplier, Warehouse, Product, LineItem đã định nghĩa trước đó) ...
+const ImportLogForm: React.FC<ImportLogFormProps> = ({
+  initialData, onSubmit, onClose }) => {
+  const [formData, setFormData] = useState<ImportLogFormData>({
+    id: '',
+    status: 'inactive',
+    fromSupplierName: '',
+    toWarehouseName: '',
+    totalAmount: 0
+  });
 
-export const ImportForm: React.FC<{ initialData: any, onSubmit: () => void, onClose: () => void }> = ({ initialData, onSubmit, onClose }) => {
-  // ... (Toàn bộ state và logic của form như đã viết ở lần trước) ...
-  // State cho dropdowns, state cho form chính, state cho mini-form...
-  // Hàm handleSelectProduct, handleAddProduct, handleRemoveItem...
-  const [suppliers, setSuppliers] = useState([]);
-  // ...
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+        id: initialData.id || '',
+        status: initialData.status || 'inactive',
+        fromSupplierName: initialData.fromSupplierName || '',
+        toWarehouseName: initialData.toWarehouseName || '',
+        totalAmount: initialData.totalAmount || 0
+      });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    // ... (Logic xây dựng payload)
-    try {
-        if (initialData) {
-            await updateImportLog(initialData.id, payload);
-            toast.success("Cập nhật đơn hàng thành công!");
-        } else {
-            await createImportLog(payload);
-            toast.success("Tạo đơn nhập hàng thành công!");
-        }
-        onSubmit(); // Gọi hàm onSubmit từ props để báo hiệu thành công
-    } catch (error) {
-        // ... (Xử lý lỗi)
+    } else {
+      setFormData({
+        id: '',
+        status: 'inactive',
+        fromSupplierName: '',
+        toWarehouseName: '',
+        totalAmount: 0
+      })
     }
+  }, [initialData]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const {name, value} = e.target;
+    setFormData((prev) => ({...prev, [name]: value}));
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    console.log("Form data gửi đi:", formData);
+    onSubmit(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-        {/* ... (Toàn bộ JSX của form như đã viết ở lần trước) ... */}
-        {/* Section 1: Thông tin chung */}
-        {/* Section 2: Khu vực thêm sản phẩm */}
-        {/* Section 3: Bảng liệt kê sản phẩm đã thêm */}
-        {/* Section 4: Nút submit và hủy */}
-    </form>
+        <form onSubmit={handleSubmit} className='space-y-4'>
+          <div>
+            <Label htmlFor="fromSupplierName">Nhà cung cấp</Label>
+            <input
+              type="text"
+              id="fromSupplierName"
+              name="fromSupplierName"
+              value={formData.fromSupplierName}
+              onChange={handleChange}
+              className="w-full border rounded px-3 py-2"
+            />
+          </div>
+
+          {/* Kho nhập */}
+          <div>
+            <Label htmlFor="toWarehouseName">Kho nhập</Label>
+            <input
+              type="text"
+              id="toWarehouseName"
+              name="toWarehouseName"
+              value={formData.toWarehouseName}
+              onChange={handleChange}
+              className="w-full border rounded px-3 py-2"
+            />
+          </div>
+
+          {/* Tổng tiền */}
+          <div>
+            <Label htmlFor="totalAmount">Tổng tiền</Label>
+            <input
+              type="number"
+              id="totalAmount"
+              name="totalAmount"
+              value={formData.totalAmount}
+              onChange={handleChange}
+              className="w-full border rounded px-3 py-2"
+            />
+          </div>
+
+          {/* Trạng thái */}
+          <div>
+            <Label htmlFor="status">Trạng thái</Label>
+            <select
+              id="status"
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              className="w-full border rounded px-3 py-2"
+            >
+              <option value="inactive">Inactive</option>
+              <option value="active">Active</option>
+            </select>
+          </div>
+
+            {/*buttuon*/}
+            <div className="flex justify-end space-x-2 pt-4">
+              <Button
+                type='button'
+                variant="outline"
+                onClick={onClose}
+                className='bg-white rounded hover:bg-gray-400 text-black'
+              >
+                Hủy
+              </Button>
+
+              <Button
+                type='submit'
+                variant="outline"
+                onClick={onClose}
+                className='px-4 py-2 button-color text-black rounded hover:button-color/40'
+              >
+                {initialData ? 'Cập nhật' : 'Thêm sản phẩm'}
+              </Button>
+            </div>
+
+        </form>
   );
 };
+
+export default ImportLogForm;

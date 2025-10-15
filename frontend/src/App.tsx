@@ -5,7 +5,7 @@ import Schedule from './pages/Schedule';
 import Attendance from 'p/Attendance';
 import Dashboard from 'p/Dashboard';
 import { useState, useEffect } from 'react';
-import { Report } from './components/inventory/Report';
+import { Report } from './components/ui/Report';
 import Warehouse from './pages/inventory-page/Warehouse';
 import Product from './pages/inventory-page/Product';
 import { LoginForm } from './pages/Login';
@@ -16,6 +16,7 @@ import { Supplier } from './pages/inventory-page/Supplier';
 import OrderManagementPage from './pages/OrderManagementPage';
 import PromoCodeManagementPage from './pages/PromoCodeManagementPage';
 import { Toaster } from 'sonner';
+import ImportPage from './pages/inventory-page/ImportPage';
 
 interface UserData {
   username: string;
@@ -65,6 +66,7 @@ const AppRouter = () => {
         <Route path = 'category' element={<Category />} />
         <Route path = 'brand' element = {<Brand />} />
         <Route path = 'supplier' element = {<Supplier />} />
+        <Route path = 'book' element = {<ImportPage />} />
       </Route>
     </Routes>
   );

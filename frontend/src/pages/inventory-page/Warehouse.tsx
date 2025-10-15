@@ -141,8 +141,8 @@ const Warehouse: React.FC = () => {
       <div className='px-6 md:px-10 -mt-10 space-y-6'>
         <div className='flex items-center justify-between '>
           <div className='mb-2'>
-            <h3 className='mb-6'>Quản lý kho hàng</h3>
-            <p className="text-muted-foreground">
+            <h3 className='mb-6 title'>Quản lý kho hàng</h3>
+            <p className="content font-size-md opacity-80">
               Theo dõi và quản lý tồn kho của bạn
             </p>
           </div>

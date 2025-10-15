@@ -45,7 +45,7 @@ export default function POSHeader({
 }: POSHeaderProps) {
   const [showSuggestions, setShowSuggestions] = useState(false);
   return (
-    <div className="w-screen bg-blue-600 border-b border-gray-200 px-4 lg:px-6 py-3 lg:py-4 fixed top-0 left-0 z-50">
+    <div className="w-screen header border-b border-gray-200 px-4 lg:px-6 py-3 lg:py-4 fixed top-0 left-0 z-50">
       <div className="flex justify-between items-center gap-4">
         <div className="flex items-center space-x-3 lg:space-x-4 flex-1 min-w-0">
           {/* Product Search */}

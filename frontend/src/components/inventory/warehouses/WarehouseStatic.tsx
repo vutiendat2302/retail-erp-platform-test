@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card';
 import {Package, AlertTriangle, TrendingUp, DollarSign } from 'lucide-react';
-import { formatCurrency, formatCurrencyShort, formatNumber } from '../Convert';
+import { formatCurrency, formatCurrencyShort, formatNumber } from '../../ui/Convert';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
 
 interface WarehouseStaticData {

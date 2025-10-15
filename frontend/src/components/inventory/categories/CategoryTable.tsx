@@ -5,7 +5,7 @@ import { Button } from '../../ui/button';
 import { Tooltip, TooltipTrigger} from '../../ui/tooltip';
 import { Eye, Trash, Pencil, Tag, Calendar } from 'lucide-react';
 import { DialogHeader, Dialog, DialogContent, DialogDescription, DialogTitle } from '../../ui/dialog';
-import { formatCurrency, formatDate } from '../Convert';
+import { formatCurrency, formatDate } from '../../ui/Convert';
 import type { Category, CategoryTableProp } from '../../../types/InventoryServiceType';
 import { PageControl } from '../../../types/PageControl';
 

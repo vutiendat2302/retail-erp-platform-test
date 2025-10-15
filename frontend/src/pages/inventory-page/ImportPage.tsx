@@ -1,43 +1,42 @@
-// file: pages/inventory-page/ImportPage.tsx
-import React, { useState, useEffect, useCallback } from 'react';
-import { PlusCircle } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+// file: pages/ImportPage.tsx
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { getImportLogs, createImportLog, updateImportLog, deleteImport } from '@/services/api'; // Giả sử api service
-import { CreateImportDialog } from '@/components/inventory/CreateImportDialog';
-import { ImportLogTable } from '@/components/inventory/ImportLogTable';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Plus } from 'lucide-react';
+import { ImportLogTable } from '@/components/inventory/import_prodcut/ImportLogTable';
+import { createImportLog, getSearchImport, updateImportLogStatus } from '@/services/inventery-api/ImportLogService';
+import type { ImportLog } from '@/types/InventoryServiceType';
+import { Step1_SelectInfo } from '@/components/inventory/import_prodcut/StepOneSelectInfo';
+import { Step2_SelectProducts } from '@/components/inventory/import_prodcut/StepTwoSelectProduct';
+import { Step3_ConfirmAndPay } from '@/components/inventory/import_prodcut/StepThree';
 
-// Định nghĩa kiểu dữ liệu cho một đơn hàng
-interface ImportLog {
-  id: string | number;
-  fromSupplierName: string;
-  toWarehouseName: string;
-  totalAmount: number;
-  status: boolean;
-  createAt: string;
-  [key: string]: any;
-}
+type WizardData = {
+  supplierId?: string;
+  warehouseId?: string;
+  supplierName?: string;
+  warehouseName?: string;
+  products?: any[];
+};
 
 const ImportPage: React.FC = () => {
+    // State cho bảng dữ liệu
     const [logs, setLogs] = useState<ImportLog[]>([]);
+    const [page, setPage] = useState<number>(0);
     const [totalPages, setTotalPages] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
-    const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-    const [currentLog, setCurrentLog] = useState<ImportLog | null>(null);
 
-    const [filters, setFilters] = useState({
-        search: '',
-        status: null as 'active' | 'inactive' | null,
-        page: 0,
-        size: 10,
-    });
+    // State cho Wizard
+    const [isWizardOpen, setWizardOpen] = useState<boolean>(false);
+    const [currentStep, setCurrentStep] = useState<number>(1);
+    const [wizardData, setWizardData] = useState<WizardData>({});
+    const [newlyCreatedLogId, setNewlyCreatedLogId] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-    const fetchLogs = useCallback(async () => {
+    // Hàm tải dữ liệu cho bảng
+    const loadLogs = async (pageNumber: number) => {
         setLoading(true);
         try {
-            const response = await getImportLogs(filters);
+            const response = await getSearchImport({ page: pageNumber, size: 10 });
             setLogs(response.data.content);
             setTotalPages(response.data.totalPages);
         } catch (error) {
@@ -45,91 +44,154 @@ const ImportPage: React.FC = () => {
         } finally {
             setLoading(false);
         }
-    }, [filters]);
+    };
 
     useEffect(() => {
-        fetchLogs();
-    }, [fetchLogs]);
+        loadLogs(page);
+    }, [page]);
 
-    const handleSuccess = () => {
-        setIsDialogOpen(false);
-        fetchLogs();
+    const handleOpenWizard = () => {
+        setCurrentStep(1);
+        setWizardData({});
+        setNewlyCreatedLogId(null);
+        setIsSubmitting(false);
+        setWizardOpen(true);
     };
 
-    const handleCreate = () => {
-        setCurrentLog(null);
-        setIsDialogOpen(true);
+    const handleCloseWizard = () => {
+        setWizardOpen(false);
+        loadLogs(page);
     };
 
-    const handleEdit = (log: ImportLog) => {
-        setCurrentLog(log);
-        setIsDialogOpen(true);
+    const handleNextStep = (dataFromStep: any) => {
+        setWizardData(prev => ({ ...prev, ...dataFromStep }));
+        setCurrentStep(prev => prev + 1);
     };
 
-    const handleDelete = async (id: string | number) => {
-        if (!window.confirm('Xác nhận xóa đơn nhập hàng này?')) return;
+		const goToPage = (newPage: number) => {
+    if (newPage >= 0 && newPage < totalPages) {
+      setPage(newPage);
+    }
+  }
+    
+    // Đã xóa hàm trùng lặp
+    const handlePrevStep = () => setCurrentStep(prev => prev - 1);
+
+    const handleNavigateToStep3 = async (dataFromStep2: any) => {
+        const finalData = { ...wizardData, ...dataFromStep2 };
+        setWizardData(finalData);
+        setIsSubmitting(true);
+
+        const payload = {
+            importLogResponseDto: {
+                fromSupplierId: finalData.supplierId,
+                toWarehouseId: finalData.warehouseId,
+                status: false,
+            },
+            importProductResponseDtoList: finalData.products.map((p: any) => ({
+                productId: p.productId,
+                quantity: p.quantity,
+                price: p.price,
+                batchId: p.batchId,
+            })),
+        };
+
         try {
-            await deleteImport(id);
-            fetchLogs(); // Tải lại dữ liệu
+            const response = await createImportLog(payload);
+            setNewlyCreatedLogId(response.data.id);
+            setCurrentStep(3);
         } catch (error) {
-            console.error("Lỗi khi xóa:", error);
+            console.error("Lỗi khi tạo phiếu nháp:", error);
+            alert("Đã xảy ra lỗi, vui lòng thử lại.");
+        } finally {
+            setIsSubmitting(false);
         }
     };
-    
-    const handleFilterChange = (key: string, value: any) => {
-        setFilters(prev => ({ ...prev, [key]: value, page: 0 }));
-    };
-      
-    const handlePageChange = (newPage: number) => {
-        setFilters(prev => ({ ...prev, page: newPage }));
+
+    const handleFinalizeImport = async () => {
+        if (!newlyCreatedLogId) return;
+        setIsSubmitting(true);
+        try {
+            await updateImportLogStatus(newlyCreatedLogId, 'active');
+            alert("Tạo phiếu nhập thành công!");
+            handleCloseWizard();
+        } catch (error) {
+            console.error("Lỗi khi xác nhận phiếu nhập:", error);
+            alert("Đã xảy ra lỗi khi xác nhận phiếu.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
-        <div className="p-4 md:p-6 lg:p-8 space-y-6">
-            <Card>
-                <CardHeader className="flex flex-row items-center justify-between">
+        <div className='px-6 mt-10'>
+            <div className='md:px-10'>
+                <div className='flex items-center justify-between'>
+                    <div className='mb-2'>
+                        <h3 className='mb-2 title'>Quản lý nhập hàng</h3>
+                        <p className="content font-size-md opacity-80">
+                            Theo dõi và quản lý các phiếu nhập hàng từ nhà cung cấp vào kho.
+                        </p>
+                    </div>
                     <div>
-                        <CardTitle>Quản lý nhập hàng</CardTitle>
-                        <p className="text-sm text-muted-foreground">Theo dõi và quản lý các đơn hàng đã nhập.</p>
+                        <Button 
+                            variant="outline" 
+                            onClick={handleOpenWizard}
+                            className="!rounded-lg bg-gray-950 text-white hover:bg-gray-700"
+                        >
+                            <Plus className="w-4 h-4 mr-2" />
+                            Thêm đơn nhập hàng
+                        </Button>
                     </div>
-                    <Button onClick={handleCreate}>
-                        <PlusCircle className="mr-2 h-4 w-4" />
-                        Tạo đơn nhập hàng
-                    </Button>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <Input 
-                            placeholder="Tìm kiếm..."
-                            value={filters.search}
-                            onChange={(e) => handleFilterChange('search', e.target.value)}
-                            className="max-w-sm"
-                        />
-                        <Select onValueChange={(value) => handleFilterChange('status', value === 'all' ? null : value)}>
-                            <SelectTrigger className="w-[180px]"><SelectValue placeholder="Lọc trạng thái" /></SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="all">Tất cả</SelectItem>
-                                <SelectItem value="active">Hoàn thành</SelectItem>
-                                <SelectItem value="inactive">Chờ xử lý</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </div>
-                    <ImportLogTable 
-                        logs={logs} 
-                        loading={loading} 
-                        onEdit={handleEdit}
-                        onDelete={handleDelete}
+                </div>
+                
+                <div className='mt-6'>
+                    <ImportLogTable
+                        data={logs}
+                        loading={loading}
+                        onEdit={() => {}}
+                        onDelete={() => {}}
+                        goToPage={goToPage}
+												setPage={setPage}
+                        page={page}
+                        totalPages={totalPages}
+                        totalElements={0}
                     />
-                    {/* Thêm component Pagination ở đây nếu cần */}
-                </CardContent>
-            </Card>
+                </div>
+            </div>
 
-            <CreateImportDialog
-                isOpen={isDialogOpen}
-                onOpenChange={setIsDialogOpen}
-                onSuccess={handleSuccess}
-                initialData={currentLog}
-            />
+            <Dialog open={isWizardOpen} onOpenChange={setWizardOpen}>
+                <DialogContent className="w-[1200px] bg-white" onInteractOutside={(e) => e.preventDefault()}>
+                    <DialogHeader>
+                        <DialogTitle>Tạo đơn nhập hàng - Bước {currentStep}/3</DialogTitle>
+                    </DialogHeader>
+                    
+                    {currentStep === 1 && (
+                        <Step1_SelectInfo 
+                            onNext={handleNextStep}
+                            initialData={wizardData}
+                        />
+                    )}
+                    {currentStep === 2 && (
+                        
+                        <Step2_SelectProducts
+                            onNext={handleNavigateToStep3} // Sửa ở đây
+                            onBack={handlePrevStep}
+                            initialData={wizardData}
+                        />
+                    )}
+                    {currentStep === 3 && (
+                        <Step3_ConfirmAndPay 
+                            initialData={wizardData} 
+                            onConfirm={handleFinalizeImport} 
+                            onClose={handleCloseWizard} 
+                            onBack={handlePrevStep} 
+                            isSubmitting={isSubmitting} 
+                        />
+                    )}
+
+                </DialogContent>
+            </Dialog>
         </div>
     );
 };

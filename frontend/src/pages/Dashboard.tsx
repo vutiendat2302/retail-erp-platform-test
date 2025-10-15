@@ -81,81 +81,82 @@ const Dashboard: React.FC = () => {
 
 
   const stats = [
-    {
-      title: 'Tổng sản phẩm',
-      value: '1,247',
-      change: '+12%',
-      changeType: 'increase' as const,
-      icon: Package,
-      color: 'text-blue-600'
-    },
-    {
-      title: 'Tổng giá trị kho',
-      value: '₫2.4M',
-      change: '+8%',
-      changeType: 'increase' as const,
-      icon: DollarSign,
-      color: 'text-green-600'
-    },
-    {
-      title: 'Đơn hàng tuần này',
-      value: '156',
-      change: '-3%',
-      changeType: 'decrease' as const,
-      icon: ShoppingCart,
-      color: 'text-orange-600'
-    },
-    {
-      title: 'Sản phẩm sắp hết',
-      value: '23',
-      change: '+5',
-      changeType: 'warning' as const,
-      icon: AlertTriangle,
-      color: 'text-red-600'
-    }
-  ];
-  
-  const recentActivity = [
-    {
-      id: 1,
-      action: 'Nhập kho',
-      product: 'Laptop Dell Inspiron 15',
-      quantity: 10,
-      time: '2 giờ trước',
-      type: 'import'
-    },
-    {
-      id: 2,
-      action: 'Xuất kho',
-      product: 'Chuột Logitech MX Master 3',
-      quantity: 5,
-      time: '4 giờ trước',
-      type: 'export'
-    },
-    {
-      id: 3,
-      action: 'Cập nhật giá',
-      product: 'Màn hình Samsung 27 inch',
-      quantity: 0,
-      time: '6 giờ trước',
-      type: 'update'
-    },
-    {
-      id: 4,
-      action: 'Cảnh báo tồn kho',
-      product: 'Bàn phím cơ Keychron K8',
-      quantity: 3,
-      time: '8 giờ trước',
-      type: 'warning'
-    }
-  ];
+  {
+    title: 'Tổng sản phẩm',
+    value: '1,340',
+    change: '+6%',
+    changeType: 'increase' as const,
+    icon: Package,
+    color: 'text-blue-600'
+  },
+  {
+    title: 'Tổng giá trị kho',
+    value: '₫12.4B',
+    change: '+10%',
+    changeType: 'increase' as const,
+    icon: DollarSign,
+    color: 'text-green-600'
+  },
+  {
+    title: 'Đơn hàng tuần này',
+    value: '1,245',
+    change: '-4%',
+    changeType: 'decrease' as const,
+    icon: ShoppingCart,
+    color: 'text-orange-600'
+  },
+  {
+    title: 'Sản phẩm sắp hết',
+    value: '48',
+    change: '+12',
+    changeType: 'warning' as const,
+    icon: AlertTriangle,
+    color: 'text-red-600'
+  }
+];
 
-  const lowStockProducts = [
-    { name: 'Chuột Logitech MX Master 3', current: 3, min: 10, percentage: 30 },
-    { name: 'Màn hình Samsung 27 inch', current: 0, min: 3, percentage: 0 },
-    { name: 'Bàn phím cơ Keychron K8', current: 5, min: 8, percentage: 62 },
-    { name: 'Tai nghe Sony WH-1000XM4', current: 2, min: 5, percentage: 40 }
-  ];
+const recentActivity = [
+  {
+    id: 1,
+    action: 'Nhập kho',
+    product: 'Sữa Vinamilk 1L',
+    quantity: 200,
+    time: '2 giờ trước',
+    type: 'import'
+  },
+  {
+    id: 2,
+    action: 'Xuất kho',
+    product: 'Gạo ST25 5kg',
+    quantity: 50,
+    time: '4 giờ trước',
+    type: 'export'
+  },
+  {
+    id: 3,
+    action: 'Cập nhật giá',
+    product: 'Dầu ăn Neptune 5L',
+    quantity: 0,
+    time: '6 giờ trước',
+    type: 'update'
+  },
+  {
+    id: 4,
+    action: 'Cảnh báo tồn kho',
+    product: 'Nước mắm Nam Ngư 500ml',
+    quantity: 12,
+    time: '8 giờ trước',
+    type: 'warning'
+  }
+];
+
+const lowStockProducts = [
+  { name: 'Mì Hảo Hảo tôm chua cay', current: 15, min: 50, percentage: 30 },
+  { name: 'Trứng gà ta hộp 10 quả', current: 5, min: 20, percentage: 25 },
+  { name: 'Nước ngọt Coca-Cola lon 330ml', current: 40, min: 100, percentage: 40 },
+  { name: 'Thịt heo ba chỉ 1kg', current: 8, min: 20, percentage: 40 }
+];
+
 
 
   const getChangeColor = (type: string) => {
