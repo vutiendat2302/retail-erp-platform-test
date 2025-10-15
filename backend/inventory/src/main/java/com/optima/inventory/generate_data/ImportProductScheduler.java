@@ -41,7 +41,6 @@ public class ImportProductScheduler {
         this.exportProductLogService = exportProductLogService;
     }
 
-    @Scheduled(fixedRate = 60000)
     @Transactional
     public void generateFullImportProcess() {
         System.out.println("Start:");
@@ -113,7 +112,6 @@ public class ImportProductScheduler {
         return logDetails;
     }
 
-    // Tao hoa don thanh toan
     public HistoryPayResponseDto createPay(Long logId, long amount) {
         HistoryPayResponseDto historyPayResponseDto = new HistoryPayResponseDto();
         historyPayResponseDto.setTimePay(LocalDateTime.now());

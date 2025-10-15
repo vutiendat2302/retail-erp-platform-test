@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface HistoryPayRepository extends JpaRepository<HistoryPayEntity, Long> {
     Optional<HistoryPayEntity> findByLogId(Long logId);
     Optional<HistoryPayEntity> findByLogIdAndType(Long logId, String type);
+
+    void deleteByLogId(Long logId);
 }

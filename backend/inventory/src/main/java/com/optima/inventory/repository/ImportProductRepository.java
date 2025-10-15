@@ -21,4 +21,5 @@ public interface ImportProductRepository extends JpaRepository<ImportProductEnti
     """)
     Integer findImportProductById(@Param("id") Long id);
 
+    void deleteByLogId(Long logId);
 }

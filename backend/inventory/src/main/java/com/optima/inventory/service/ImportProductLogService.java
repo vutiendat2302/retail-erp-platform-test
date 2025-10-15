@@ -41,7 +41,7 @@ public class ImportProductLogService {
     private HistoryPayRepository historyPayRepository;
     @Autowired
     private HistoryPayMapper historyPayMapper;
-
+    @Autowired
     private ProductService productService;
 
 
@@ -181,9 +181,10 @@ public class ImportProductLogService {
     }
 
     @Transactional
-    public void deleteImport(Long importId) {
-        importLogRepository.deleteById(importId);
+    public void deleteImport(Long logId) {
+        importLogRepository.deleteById(logId);
+        importProductRepository.deleteByLogId(logId);
+        historyPayRepository.deleteByLogId(logId);
     }
-
 }
 

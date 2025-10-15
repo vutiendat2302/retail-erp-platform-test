@@ -1,20 +1,14 @@
 package com.optima.inventory.controller;
 
 import com.optima.inventory.dto.response.*;
-import com.optima.inventory.entity.ImportLogEntity;
-import com.optima.inventory.repository.ImportLogRepository;
 import com.optima.inventory.service.ImportProductLogService;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("http://localhost:5173")
@@ -22,9 +16,6 @@ import java.util.stream.Collectors;
 public class ImportProductLogController {
     @Autowired
     private ImportProductLogService importProductLogService;
-    @Autowired
-    private ImportLogRepository importLogRepository;
-
 
     @GetMapping("/getHistoryPay/{logId}")
     public HistoryPayResponseDto getHistoryPay(@PathVariable Long logId) {
@@ -75,7 +66,7 @@ public class ImportProductLogController {
     @DeleteMapping("/deleteImport/{importId}")
     public String deleteImport(@PathVariable("importId") Long importId) {
         importProductLogService.deleteImport(importId);
-        return "Product has been deleted";
+        return "Import Log has been deleted";
     }
 
 
