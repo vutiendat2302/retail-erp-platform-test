@@ -2,11 +2,7 @@ package com.optima.inventory.dto.request;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.optima.inventory.entity.BrandEntity;
-import com.optima.inventory.entity.CategoryEntity;
-import com.optima.inventory.entity.ManufacturingLocationEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.math.BigDecimal;
